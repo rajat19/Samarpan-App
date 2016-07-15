@@ -1,23 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
 	xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
 	android:orientation="horizontal"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    card_view:cardElevation="10dp"
+    card_view:cardBackgroundColor="@color/colorLightest"
+    card_view:cardCornerRadius="10dp"
+    card_view:contentPadding="10dp"
 	>
-	<ImageView
-		android:id="@+id/listIcon"
-		android:padding="8dp"
-		android:layout_gravity="center_vertical"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:src="@drawable/ic_launcher" />
-	<TextView
-		android:id="@+id/listCompany"
-		android:padding="8dp"
-		android:layout_gravity="center_vertical"
-		android:text="Companyname"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:src="@drawable/ic_launcher" />
-</LinearLayout>
+	<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/linearLayout1"
+        android:orientation="vertical">
+        <TextView
+            android:textSize="20sp"
+            android:id="@+id/listCompany"
+            android:layout_gravity="center_vertical"
+            android:text="Infroid Technologies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/hv1"
+            android:layout_below="@+id/listCompany"
+            android:background="@color/colorPrimaryDark">
+
+        </View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingLocation"
+            android:text="Location: "
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/hv1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listLocation"
+            android:text="Noida, Uttar Pradesh, India"
+            android:layout_toEndOf="@+id/headingLocation"
+            android:layout_below="@+id/hv1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingFrom"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listLocation"
+            android:text="Started Working From: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listFrom"
+            android:layout_below="@+id/listLocation"
+            android:layout_toEndOf="@+id/headingFrom"
+            android:hint="8 July 1965"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingTo"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listFrom"
+            android:text="Ended Working On: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listTo"
+            android:layout_below="@+id/listFrom"
+            android:layout_toEndOf="@+id/headingTo"
+            android:hint="8 July 1995"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingSector"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listTo"
+            android:text="Sector: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listSector"
+            android:layout_below="@+id/listTo"
+            android:layout_toEndOf="@+id/headingSector"
+            android:hint="Public Sector"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingCategory"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listSector"
+            android:text="Category: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listCategory"
+            android:layout_below="@+id/listSector"
+            android:layout_toEndOf="@+id/headingCategory"
+            android:hint="Central Government"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingMinistry"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listCategory"
+            android:text="Ministry: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listMinistry"
+            android:layout_below="@+id/listCategory"
+            android:layout_toEndOf="@+id/headingMinistry"
+            android:hint="Ministry of Human Resource &amp; Development"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingDepartment"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listMinistry"
+            android:text="Department: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listDepartment"
+            android:layout_below="@+id/listMinistry"
+            android:layout_toEndOf="@+id/headingDepartment"
+            android:hint="Department of Science &amp; Technology"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingRank"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listDepartment"
+            android:text="Grade Rank: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listRank"
+            android:layout_below="@+id/listDepartment"
+            android:layout_toEndOf="@+id/headingRank"
+            android:hint="Grade A"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingPosition"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listRank"
+            android:text="Position: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listPosition"
+            android:layout_below="@+id/listRank"
+            android:layout_toEndOf="@+id/headingPosition"
+            android:hint="General Manager"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingRole"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listPosition"
+            android:text="Role: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listRole"
+            android:layout_below="@+id/listPosition"
+            android:layout_toEndOf="@+id/headingRole"
+            android:hint="Senior Web Developer"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingDescription"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listRole"
+            android:text="Description: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listDescription"
+            android:layout_below="@+id/listRole"
+            android:layout_toEndOf="@+id/headingDescription"
+            android:hint="Lead Developer and the manager of the company"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

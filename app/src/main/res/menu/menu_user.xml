@@ -7,12 +7,20 @@
             android:title="Home" >
         </item>
         <item
+            android:id="@+id/create_id"
+            android:title="Create Profile">
+        </item>
+        <item
             android:id="@+id/profile_id"
-            android:title="Profile" >
+            android:title="My Profile" >
         </item>
         <item
             android:id="@+id/edit_id"
             android:title="Edit Details" >
+        </item>
+        <item
+            android:id="@+id/photo_id"
+            android:title="Upload Photo">
         </item>
         <item
             android:id="@+id/work_experience_id"

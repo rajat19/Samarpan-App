@@ -36,6 +36,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     EditText email, password;
     Button btnLogin, btnRegister, btnForgot;
     String emailString, passwordString;
+    FragmentSwitchListener mCallback;
     ServerLink link = new ServerLink();
     public String URL_LOGIN = link.URL_LOGIN;
     private Session session;
@@ -47,6 +48,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        try{
+            mCallback = (FragmentSwitchListener) activity;
+        }
+        catch (ClassCastException e) {
+            Log.d("Error is", e.getMessage());
+        }
     }
 
     @Override
@@ -96,7 +103,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                     flag++;
                 }
 
-                if(passwordString.equals("")){
+                else if(passwordString.equals("")){
                     Toast.makeText(getActivity(), "The password field is required.", Toast.LENGTH_SHORT).show();
                     flag++;
                 }
@@ -111,8 +118,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 }
                     break;
             case R.id.btnForgot:
+                mCallback.switchFragment(3);
                 break;
             case R.id.btnRegister:
+                mCallback.switchFragment(1);
                 break;
         }
     }
@@ -125,7 +134,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     private class Login extends AsyncTask<String, Void, Void> {
 
         int isLoggedIn = 0;
-        String username = ""; int userid = 0;
+        int userid = 0;
+        String username = "";
+        String usertype = "";
         @Override
         protected Void doInBackground(String... arg) {
             String stEmail = arg[0];
@@ -137,7 +148,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
             ServiceHandler jsonParser = new ServiceHandler();
             Log.e("Address = ", URL_LOGIN);
-            String json = jsonParser.makeServiceCall(URL_LOGIN, ServiceHandler.POST, params);
+            String json = jsonParser.makeServiceCall(URL_LOGIN, ServiceHandler.GET, params);
             Log.e("Response", "= "+json);
             if (json != null) {
                 try {
@@ -156,9 +167,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                                 JSONObject userObj = (JSONObject) details.get(i);
                                 Log.e("Details: ", " >>"+userObj);
                                 userid = userObj.getInt("id");
+                                usertype = userObj.getString("type");
                                 username = userObj.getString("name");
                                 session.setUserId(userid);
                                 session.setUserName(username);
+                                session.setUserType(usertype);
+                                session.setLogInfo(1);
                             }
                         }
                     }
@@ -180,8 +194,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             if(isLoggedIn == 1) {
                 Log.e("logg", isLoggedIn+" "+username);
                 Toast.makeText(getActivity(), "Welcome "+username, Toast.LENGTH_SHORT);
-//                Intent i =new Intent(getContext(), UserActivity.class );
-//                startActivity(i);
+                if(session.getUserType().equals("1")) {
+                    Intent i = new Intent(getContext(), ViewerActivity.class);
+                    startActivity(i);
+                }
+                if(session.getUserType().equals("2")) {
+                    Intent i = new Intent(getContext(), UserActivity.class);
+                    startActivity(i);
+                }
             }
         }
     }

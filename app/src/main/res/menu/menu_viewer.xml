@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_id"
+            android:title="Home" >
+        </item>
+        <item
+            android:id="@+id/create_id"
+            android:title="Create Profile">
+        </item>
+        <item
+            android:id="@+id/profile_id"
+            android:title="My Profile" >
+        </item>
+        <item
+            android:id="@+id/edit_id"
+            android:title="Edit Details" >
+        </item>
+        <item
+            android:id="@+id/photo_id"
+            android:title="Upload Company Logo">
+        </item>
+        <item
+            android:id="@+id/senior_citizens_id"
+            android:title="View Senior Citizens">
+        </item>
+        <item
+            android:id="@+id/logout_id"
+            android:title="Logout" >
+        </item>
+    </group>
+</menu>

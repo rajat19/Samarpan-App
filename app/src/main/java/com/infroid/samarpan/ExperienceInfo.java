@@ -1,6 +1,5 @@
 package com.infroid.samarpan;
 
 public class ExperienceInfo {
-	int iconId;
-	String company;
+    String company, location, to, from, sector, category, ministry, department, rank, position, role, description;
 }

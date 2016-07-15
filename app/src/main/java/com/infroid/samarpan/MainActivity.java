@@ -15,7 +15,7 @@ import android.text.style.TypefaceSpan;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentSwitchListener {
 	
 	Toolbar toolbar;
     TextView textView;
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 	ActionBarDrawerToggle actionBarDrawerToggle;
 	FragmentTransaction fragmentTransaction;
 	NavigationView navigationView;
+    Typeface type;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,25 +37,22 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main_container, new HomeFragment());
         fragmentTransaction.commit();
-//        SpannableString s = new SpannableString("Samarpan");
-//        s.setSpan(new TypefaceSpan("fonts/samarn.ttf"), 0, s.length());
         textView = new TextView(getApplicationContext());
         textView.setText("Samarpan");
         textView.setTextSize(30);
         textView.setTextColor(Color.WHITE);
-        Typeface type = Typeface.createFromAsset(getAssets(),"fonts/samarn.ttf");
+        type = Typeface.createFromAsset(getAssets(),"fonts/samarn.ttf");
         textView.setTypeface(type);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
-//        getSupportActionBar().setTitle("Samarpan");
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (item.getItemId()) {
 
                     case R.id.home_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new HomeFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.login_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new LoginFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -74,13 +71,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.register_id:
-//                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                        fragmentTransaction.replace(R.id.main_container, new RegisterFragment());
-//                        fragmentTransaction.commit();
-//                        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//                        getSupportActionBar().setCustomView(textView);
-//                        item.setChecked(true);
-//                        drawerLayout.closeDrawers();
+                       fragmentTransaction.replace(R.id.main_container, new RegisterFragment());
+                       fragmentTransaction.commit();
+                       getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                       getSupportActionBar().setCustomView(textView);
+                       item.setChecked(true);
+                       drawerLayout.closeDrawers();
                 		break;
                 }
                 return true;
@@ -92,5 +88,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void switchFragment(int id) {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        switch(id) {
+            case 1:
+            /*Register*/
+                fragmentTransaction.replace(R.id.main_container, new RegisterFragment());
+                break;
+            case 2:
+            /*Login*/
+                fragmentTransaction.replace(R.id.main_container, new LoginFragment());
+                break;
+            case 3:
+            /*Forgot Password*/
+                fragmentTransaction.replace(R.id.main_container, new RegisterFragment());
+                break;
+            default:
+            /*Redirect to Home*/
+                fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+        }
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(textView);
     }
 }

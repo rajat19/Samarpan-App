@@ -12,6 +12,15 @@ public class Session {
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 	}
 
+    public void setLogInfo(int info) {
+        prefs.edit().putInt("isLoggedIn", info).commit();
+    }
+
+    public Integer getLogInfo() {
+        int isLoggedIn = prefs.getInt("isLoggedIn", 0);
+        return isLoggedIn;
+    }
+
 	public void setUserId(int userid) {
         prefs.edit().putInt("userid", userid).commit();
 	}
@@ -29,4 +38,13 @@ public class Session {
 		String name = prefs.getString("username", "");
 		return name;
 	}
+
+    public void setUserType(String type) {
+        prefs.edit().putString("type", type).commit();
+    }
+
+    public String getUserType() {
+        String type = prefs.getString("type", "");
+        return type;
+    }
 }

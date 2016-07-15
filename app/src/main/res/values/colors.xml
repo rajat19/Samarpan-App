@@ -6,8 +6,21 @@
 
     <!--Extra colors-->
     <color name="colorBlue">#2196f3</color>
+    <color name="colorLightBlue">#03a9f4</color>
+    <color name="colorLightest">#bfdce9</color>
+    <color name="colorBlueGrey">#607d8b</color>
+    <color name="colorCyan">#00bcd4</color>
     <color name="colorRed">#f44336</color>
+    <color name="colorPink">#e91e63</color>
+    <color name="colorGreen">#4caf50</color>
+    <color name="colorLightGreen">#8bc34a</color>
     <color name="colorTeal">#009688</color>
     <color name="colorSecondary">#a6c</color>
+    <color name="colorPurple">#9c27b0</color>
+    <color name="colorIndigo">#3f51b5</color>
     <color name="colorOrange">#ff9800</color>
+    <color name="colorYellow">#ffeb3b</color>
+    <color name="colorHighlight">#B6B6B6</color>
+    <color name="colorBrown">#795548</color>
+    <color name="colorWhite">#fff</color>
 </resources>

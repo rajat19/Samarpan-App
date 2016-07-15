@@ -36,6 +36,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     ServerLink link = new ServerLink();
     private String URL_REGISTER = link.URL_REGISTER;
     private Session session;
+    FragmentSwitchListener mCallback;
     private static final Pattern EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     public RegisterFragment() {
         // Required empty public constructor
@@ -44,6 +45,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        try{
+            mCallback = (FragmentSwitchListener) activity;
+        }
+        catch (ClassCastException e) {
+            Log.d("Error is", e.getMessage());
+        }  
     }
 
     @Override
@@ -122,6 +129,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.btnLogin:
+                mCallback.switchFragment(2);
                 break;
         }
     }
@@ -146,10 +154,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             List<NameValuePair> params = new ArrayList<>();
             params.add(new BasicNameValuePair("email", stEmail));
             params.add(new BasicNameValuePair("password", stPassword));
+            params.add(new BasicNameValuePair("name", stName));
+            params.add(new BasicNameValuePair("contact", stContact));
+            params.add(new BasicNameValuePair("password_confirmation", stPasswordConfirmation));
 
             ServiceHandler jsonParser = new ServiceHandler();
             Log.e("Address = ", URL_REGISTER);
-            String json = jsonParser.makeServiceCall(URL_REGISTER, ServiceHandler.POST, params);
+            String json = jsonParser.makeServiceCall(URL_REGISTER, ServiceHandler.GET, params);
             Log.e("Response", "= "+json);
             if (json != null) {
                 try {
@@ -192,8 +203,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             if(isLoggedIn == 1) {
                 Log.e("logg", isLoggedIn+" "+username);
                 Toast.makeText(getActivity(), "Welcome "+username, Toast.LENGTH_SHORT);
-//                Intent i =new Intent(getContext(), UserActivity.class );
-//                startActivity(i);
+                mCallback.switchFragment(2);
             }
         }
     }
