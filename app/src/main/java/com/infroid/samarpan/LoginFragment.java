@@ -2,6 +2,7 @@ package com.infroid.samarpan;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -37,6 +38,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     Button btnLogin, btnRegister, btnForgot;
     String emailString, passwordString;
     FragmentSwitchListener mCallback;
+    ProgressDialog progressDialog;
     ServerLink link = new ServerLink();
     public String URL_LOGIN = link.URL_LOGIN;
     private Session session;
@@ -137,6 +139,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         int userid = 0;
         String username = "";
         String usertype = "";
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
         @Override
         protected Void doInBackground(String... arg) {
             String stEmail = arg[0];
@@ -194,6 +202,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             if(isLoggedIn == 1) {
                 Log.e("logg", isLoggedIn+" "+username);
                 Toast.makeText(getActivity(), "Welcome "+username, Toast.LENGTH_SHORT);
+                Log.e("usertype", session.getUserType());
+                if(session.getUserType().equals("0")) {
+                    Intent i = new Intent(getContext(), AdminActivity.class);
+                    startActivity(i);
+                }
                 if(session.getUserType().equals("1")) {
                     Intent i = new Intent(getContext(), ViewerActivity.class);
                     startActivity(i);
@@ -202,7 +215,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                     Intent i = new Intent(getContext(), UserActivity.class);
                     startActivity(i);
                 }
+                if(session.getUserType().equals("3")) {
+                    Toast.makeText(getActivity(), "Bulk Upload is not available for App, Please visit the website", Toast.LENGTH_SHORT);
+                    session.setLogInfo(0);
+                }
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }

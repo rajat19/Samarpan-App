@@ -20,24 +20,26 @@ public class StartActivity extends AppCompatActivity {
         progressBar = (ContentLoadingProgressBar) findViewById(R.id.progress);
         progressBar.show();
         int isLoggedIn = session.getLogInfo();
+        if(Integer.toString(isLoggedIn).equals(null))
+            isLoggedIn = 0;
+        Log.e("log", isLoggedIn+"");
         switch (isLoggedIn) {
             case 0:
                 Log.e("status: ", "LoggedOut");
                 in = new Intent(getApplicationContext(), MainActivity.class);
                 break;
             case 1:
-                Log.e("status: ", "LoggedIn");
+                Log.e("status: ", "LoggedIn "+ session.getUserType()+"<-");
+                if(session.getUserType().equals("0")) {
+                    in = new Intent(getApplicationContext(), AdminActivity.class);
+                }
                 if(session.getUserType().equals("1")) {
                     in = new Intent(getApplicationContext(), ViewerActivity.class);
-                    startActivity(in);
                 }
                 if(session.getUserType().equals("2")) {
                     in = new Intent(getApplicationContext(), UserActivity.class);
-                    startActivity(in);
                 }
                 break;
-            default:
-                in = new Intent(getApplicationContext(), MainActivity.class);
         }
         startActivity(in);
         if(progressBar.isShown())

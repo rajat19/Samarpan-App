@@ -155,4 +155,9 @@ public class ViewerActivity extends AppCompatActivity implements FragmentSwitchL
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
     }
+
+    @Override
+    public void switchFragment(int position, String user_id) {
+
+    }
 }

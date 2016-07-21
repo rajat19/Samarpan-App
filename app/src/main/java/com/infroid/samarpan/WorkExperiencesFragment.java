@@ -1,9 +1,11 @@
 package com.infroid.samarpan;
 
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +26,9 @@ import java.util.List;
 public class WorkExperiencesFragment extends Fragment {
 
 	private RecyclerView recyclerView;
+    FloatingActionButton fab;
 	private ExperienceAdapter adapter;
+    FragmentSwitchListener mCallback;
     ServerLink link = new ServerLink();
 //    WorkExperiences experiences = new WorkExperiences();
     List<WorkExperiences> experiencesList = new ArrayList<>();
@@ -35,6 +39,16 @@ public class WorkExperiencesFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try{
+            mCallback = (FragmentSwitchListener) activity;
+        }
+        catch (ClassCastException e) {
+            Log.d("Error is", e.getMessage());
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,8 +57,16 @@ public class WorkExperiencesFragment extends Fragment {
         session = new Session(getContext());
         View view = inflater.inflate(R.layout.fragment_work_experiences, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.drawerList);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
         int user_id = session.getUserId();
         new WorkExperienceView().execute(user_id);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallback.switchFragment(4);
+            }
+        });
         return view;
     }
 

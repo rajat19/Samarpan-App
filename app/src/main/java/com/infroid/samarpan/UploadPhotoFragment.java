@@ -86,8 +86,6 @@ public class UploadPhotoFragment extends Fragment {
         new PhotoDetails().execute(session.getUserId());
         if (!isDeviceSupportCamera()) {
             Toast.makeText(getActivity(), "Sorry! Your device doesn't support camera", Toast.LENGTH_LONG).show();
-            // will close the app if the device does't have camera
-            //finish();
         }
         takefoto.setOnClickListener(new View.OnClickListener() {
 
@@ -126,12 +124,14 @@ public class UploadPhotoFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putParcelable("file_uri", fileUri);
     }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        fileUri =savedInstanceState.getParcelable("file_uri");
-    }
+//
+//    @Override
+//    public void onViewStateRestored(Bundle savedInstanceState) {
+//        super.onViewStateRestored(savedInstanceState);
+//        if(savedInstanceState.getParcelable("file_uri").toString().equals(null)) {
+//            fileUri = savedInstanceState.getParcelable("file_uri");
+//        }
+//    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -356,7 +356,7 @@ public class UploadPhotoFragment extends Fragment {
                 }
             }
             else {
-                Log.e("JSON Data", "Didn't receive any data from server!");
+                Log.e("JSON Data", "Sorry the image could not be loaded!");
             }
             return json;
         }

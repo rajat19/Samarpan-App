@@ -26,22 +26,22 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileViewerFragment extends Fragment {
+public class AdminViewCitizenFragment extends Fragment {
 
-    TextView name, date_of_birth, expertise_in, members, contact, contact_work, contact_other,
-            contact_fax, contact_pager, address_permanent, address_alternate, email, email_work,
-            email_other, skype, fb, google, linkedin, website, description;
+    TextView name, date_of_birth, retirement, expertise_in, gender, contact, contact_home,
+            contact_other, contact_fax, contact_pager, address_permanent, address_current,
+            address_alternate, email, email_other, skype, fb, google, linkedin, website, goals,
+            interests, biography;
     ImageView photo;
     FloatingActionButton fab;
     Details completeDetail = new Details();
     ServerLink link = new ServerLink();
     FragmentSwitchListener mCallback;
     ProgressDialog progressDialog;
-    Session session;
-    int session_user_id;
+    int tempUser;
     public String URL_PROFILE = link.URL_PROFILE;
     public String URL_PHOTO = link.URL_PHOTO;
-    public ProfileViewerFragment() {
+    public AdminViewCitizenFragment() {
         // Required empty public constructor
     }
 
@@ -60,21 +60,19 @@ public class ProfileViewerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        session = new Session(getContext());
-        session_user_id = session.getUserId();
-        Log.e("userid", session_user_id+"");
-        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        View view =  inflater.inflate(R.layout.fragment_admin_view_citizen, container, false);
         name = (TextView) view.findViewById(R.id.name);
         date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
         expertise_in = (TextView) view.findViewById(R.id.expertise_in);
-        email_work = (TextView) view.findViewById(R.id.email_work);
-        members = (TextView) view.findViewById(R.id.members);
+        retirement = (TextView) view.findViewById(R.id.retirement);
+        gender = (TextView) view.findViewById(R.id.gender);
         contact = (TextView) view.findViewById(R.id.contact);
-        contact_work = (TextView) view.findViewById(R.id.contact_work);
+        contact_home = (TextView) view.findViewById(R.id.contact_home);
         contact_other = (TextView) view.findViewById(R.id.contact_other);
         contact_fax = (TextView) view.findViewById(R.id.contact_fax);
         contact_pager = (TextView) view.findViewById(R.id.contact_pager);
         address_permanent = (TextView) view.findViewById(R.id.address_permanent);
+        address_current = (TextView) view.findViewById(R.id.address_current);
         address_alternate = (TextView) view.findViewById(R.id.address_alternate);
         email = (TextView) view.findViewById(R.id.email);
         email_other = (TextView) view.findViewById(R.id.email_other);
@@ -83,7 +81,9 @@ public class ProfileViewerFragment extends Fragment {
         google = (TextView) view.findViewById(R.id.google);
         linkedin = (TextView) view.findViewById(R.id.linkedin);
         website = (TextView) view.findViewById(R.id.website);
-        description = (TextView) view.findViewById(R.id.description);
+        goals = (TextView) view.findViewById(R.id.goals);
+        interests = (TextView) view.findViewById(R.id.interests);
+        biography = (TextView) view.findViewById(R.id.biography);
         photo = (ImageView) view.findViewById(R.id.photo);
         fab = (FloatingActionButton) view.findViewById(R.id.floatEdit);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +92,7 @@ public class ProfileViewerFragment extends Fragment {
                 mCallback.switchFragment(2);
             }
         });
-        new Profile().execute(session_user_id);
+        new Profile().execute(tempUser);
         return view;
     }
 
@@ -101,14 +101,16 @@ public class ProfileViewerFragment extends Fragment {
         String dob = details.getDate_of_birth()+" ("+details.getAge()+") years old";
         date_of_birth.setText(dob);
         expertise_in.setText(details.getExpertise_in());
-        email_work.setText(details.getEmail_work());
-        members.setText(details.getMembers());
+        String retire = details.getRetirement()+" (At the age of "+details.getRetirement_age()+")";
+        retirement.setText(retire);
+        gender.setText(details.getGender());
         contact.setText(details.getContact());
-        contact_work.setText(details.getContact_work());
+        contact_home.setText(details.getContact_home());
         contact_other.setText(details.getContact_other());
         contact_fax.setText(details.getContact_fax());
         contact_pager.setText(details.getContact_pager());
         address_permanent.setText(details.getAddress_permanent());
+        address_current.setText(details.getAddress_current());
         address_alternate.setText(details.getAddress_alternate());
         email.setText(details.getEmail());
         email_other.setText(details.getEmail_other());
@@ -117,7 +119,9 @@ public class ProfileViewerFragment extends Fragment {
         google.setText(details.getGoogle());
         linkedin.setText(details.getLinkedin());
         website.setText(details.getWebsite());
-        description.setText(details.getDescription());
+        goals.setText(details.getGoals());
+        interests.setText(details.getInterests());
+        biography.setText(details.getBiography());
     }
 
     private class Profile extends AsyncTask<Integer, Void, String> {
@@ -154,15 +158,18 @@ public class ProfileViewerFragment extends Fragment {
                         completeDetail.setDate_of_birth(userObj.getString("date_of_birth2"));
                         completeDetail.setAge(userObj.getString("age"));
                         completeDetail.setExpertise_in(userObj.getString("expertise_in"));
-                        completeDetail.setEmail_work(userObj.getString("email_work"));
-                        completeDetail.setMembers(userObj.getString("members"));
+                        completeDetail.setRetirement(userObj.getString("retirement2"));
+                        completeDetail.setRetirement_age(userObj.getString("retirement_age"));
+                        completeDetail.setGender(userObj.getString("gender"));
                         completeDetail.setContact(userObj.getString("contact"));
-                        completeDetail.setContact_work(userObj.getString("contact_work"));
+                        completeDetail.setContact_home(userObj.getString("contact_home"));
                         completeDetail.setContact_other(userObj.getString("contact_other"));
                         completeDetail.setContact_fax(userObj.getString("contact_fax"));
                         completeDetail.setContact_pager(userObj.getString("contact_pager"));
                         completeDetail.setAddress_permanent(userObj.getString("add_permanent"));
                         completeDetail.setPincode_permanent(userObj.getString("pincode_permanent"));
+                        completeDetail.setAddress_current(userObj.getString("add_current"));
+                        completeDetail.setPincode_current(userObj.getString("pincode_current"));
                         completeDetail.setPincode_alternate(userObj.getString("pincode_alternate"));
                         completeDetail.setAddress_alternate(userObj.getString("add_alternate"));
                         completeDetail.setEmail(userObj.getString("email"));
@@ -172,14 +179,17 @@ public class ProfileViewerFragment extends Fragment {
                         completeDetail.setGoogle(userObj.getString("google"));
                         completeDetail.setLinkedin(userObj.getString("linkedin"));
                         completeDetail.setWebsite(userObj.getString("website"));
-                        completeDetail.setDescription(userObj.getString("description"));
+                        completeDetail.setGoals(userObj.getString("goals"));
+                        completeDetail.setInterests(userObj.getString("interests"));
+                        completeDetail.setBiography(userObj.getString("biography"));
                         completeDetail.setPhoto(userObj.getString("photo"));
+                        completeDetail.setCv(userObj.getString("cv"));
                     }
-                } 
+                }
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
-            } 
+            }
             else {
                 Log.e("JSON Data", "Didn't receive any data from server!");
             }

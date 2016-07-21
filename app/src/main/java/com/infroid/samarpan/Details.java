@@ -2,6 +2,7 @@ package com.infroid.samarpan;
 
 public class Details {
 
+    private String user_id;
 	private String name;
 	private String date_of_birth;
 	private String age;
@@ -52,6 +53,14 @@ public class Details {
 	public Details() {
 
 	}
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
 
     public String getDate_of_birth() {
         return date_of_birth;
@@ -420,4 +429,6 @@ public class Details {
     public void setCv(String cv) {
         this.cv = cv;
     }
+
+
 }

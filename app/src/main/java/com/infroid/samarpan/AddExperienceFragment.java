@@ -40,7 +40,7 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
     DatePickerFragment picker;
     FragmentSwitchListener mCallback;
     Bundle args;
-    WorkExperiences experienceNew;
+    WorkExperiences experienceNew = new WorkExperiences();
     ServerLink link = new ServerLink();
     String URL_ADD_EXPERIENCE = link.URL_ADD_EXPERIENCE;
     public AddExperienceFragment() {
@@ -125,11 +125,13 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        switch (view.getId()) {
+        switch (parent.getId()) {
             case R.id.sector:
                 String selectedSector = parent.getItemAtPosition(pos).toString();
+                Log.e("sector", selectedSector);
                 if(selectedSector.equals("Public Sector")) {
-                    experienceNew.setSector(selectedSector);
+                    Log.e("sector", selectedSector);
+//                    Log.e("se", experienceNew.getSector());
                     categoryPu.setVisibility(View.VISIBLE);
                     categoryPr.setVisibility(View.GONE);
                     ministry.setVisibility(View.GONE);
@@ -140,6 +142,7 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
                     position.setVisibility(View.GONE);
                     role.setVisibility(View.GONE);
                     description.setVisibility(View.GONE);
+//                    experienceNew.setSector(selectedSector);
                     populateCategoryPublic();
                 }
                 else if(selectedSector.equals("Private Sector")) {
@@ -268,8 +271,9 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
     };
 
     public void getFilledDetails() {
-        if(experienceNew.getCategory().isEmpty() && experienceNew.getSector().equals("Private Sector"))
+        if(experienceNew.getCategory().isEmpty() && experienceNew.getSector().equals("Private Sector")) {
             experienceNew.setCategory(categoryPr.getText().toString());
+        }
         experienceNew.setMinistry(ministry.getText().toString());
         experienceNew.setDepartment(department.getText().toString());
         experienceNew.setCompany(company.getText().toString());
@@ -351,6 +355,9 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
 
                         if (errors.length() > 0) {
                             expAdded = 0;
+                            for(int i = 0; i< errors.length(); i++) {
+                                
+                            }
                             Toast.makeText(getActivity(), errors.get(0).toString(), Toast.LENGTH_SHORT).show();
                         } else {
                             expAdded = 1;

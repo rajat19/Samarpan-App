@@ -7,12 +7,16 @@
             android:title="Home">
         </item>
         <item
-            android:id="@+id/senior_citizens_id"
+            android:id="@+id/senior_citizen_id"
             android:title="Senior Citizens">
         </item>
         <item
             android:id="@+id/profile_viewer_id"
             android:title="Profile Viewer">
+        </item>
+        <item
+            android:id="@+id/department_id"
+            android:title="Department">
         </item>
         <item
             android:id="@+id/logout_id"

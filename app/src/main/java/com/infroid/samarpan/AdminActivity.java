@@ -65,7 +65,7 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
                         drawerLayout.closeDrawers();
                         break;
 
-                    case R.id.create_id:
+                    case R.id.senior_citizen_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new NewRegistrationFragment());
                         fragmentTransaction.commit();
@@ -75,9 +75,9 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
                         drawerLayout.closeDrawers();
                         break;
 
-                    case R.id.profile_id:
+                    case R.id.profile_viewer_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new ProfileFragment());
+                        fragmentTransaction.replace(R.id.main_container, new AdminSearchViewerFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);
@@ -85,29 +85,9 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
                         drawerLayout.closeDrawers();
                         break;
 
-                    case R.id.edit_id:
+                    case R.id.department_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new EditDetailsFragment());
-                        fragmentTransaction.commit();
-                        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-                        getSupportActionBar().setCustomView(textView);
-                        item.setChecked(true);
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.work_experience_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new WorkExperiencesFragment());
-                        fragmentTransaction.commit();
-                        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-                        getSupportActionBar().setCustomView(textView);
-                        item.setChecked(true);
-                        drawerLayout.closeDrawers();
-                        break;
-
-                    case R.id.photo_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new UploadPhotoFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);
@@ -133,26 +113,49 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
     }
 
     @Override
-    public void switchFragment(int id) {
+    public void switchFragment(int position) {
+
+    }
+
+    @Override
+    public void switchFragment(int id, String user_id) {
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch(id) {
             case 1:
-            /*Profile*/
-                fragmentTransaction.replace(R.id.main_container, new ProfileFragment());
+                /*Edit Details*/
+                AdminEditCitizenFragment o = new AdminEditCitizenFragment();
+                o.tempUser = user_id;
+                fragmentTransaction.replace(R.id.main_container, new AdminEditCitizenFragment());
                 break;
             case 2:
-            /*Edit Details*/
-                fragmentTransaction.replace(R.id.main_container, new EditDetailsFragment());
+                /*View Details*/
+                AdminViewCitizenFragment o2 = new AdminViewCitizenFragment();
+                o2.tempUser = Integer.parseInt(user_id);
+                fragmentTransaction.replace(R.id.main_container, new AdminViewCitizenFragment());
                 break;
             case 3:
-            /*Work Experience*/
-                fragmentTransaction.replace(R.id.main_container, new WorkExperiencesFragment());
+                /*Senior Citizen Lists*/
+                fragmentTransaction.replace(R.id.main_container, new AdminResultCitizenFragment());
+                break;
+            case 4:
+                /*Download Resume*/
+                break;
+            case 5:
+                AdminEditViewerFragment o3 = new AdminEditViewerFragment();
+                o3.tempUser = Integer.parseInt(user_id);
+                /*Edit Viewer Details*/
+                fragmentTransaction.replace(R.id.main_container, new AdminResultCitizenFragment());
+                break;
+            case 6:
+                AdminViewViewerFragment o4 = new AdminViewViewerFragment();
+                o4.tempUser = Integer.parseInt(user_id);
+                /*View Viewer Details*/
+                fragmentTransaction.replace(R.id.main_container, new AdminResultCitizenFragment());
                 break;
             default:
             /*Redirect to Home*/
                 fragmentTransaction.replace(R.id.main_container, new HomeFragment());
         }
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);

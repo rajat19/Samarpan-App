@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements FragmentSwitchLis
                        getSupportActionBar().setCustomView(textView);
                        item.setChecked(true);
                        drawerLayout.closeDrawers();
-                		break;
+                        break;
                 }
                 return true;
             }
@@ -110,9 +110,13 @@ public class MainActivity extends AppCompatActivity implements FragmentSwitchLis
             /*Redirect to Home*/
                 fragmentTransaction.replace(R.id.main_container, new HomeFragment());
         }
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
+    }
+
+    @Override
+    public void switchFragment(int position, String user_id) {
+
     }
 }

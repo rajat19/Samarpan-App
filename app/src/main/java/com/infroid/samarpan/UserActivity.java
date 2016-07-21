@@ -148,6 +148,10 @@ public class UserActivity extends AppCompatActivity implements FragmentSwitchLis
             /*Work Experience*/
                 fragmentTransaction.replace(R.id.main_container, new WorkExperiencesFragment());
                 break;
+            case 4:
+                fragmentTransaction.replace(R.id.main_container, new AddExperienceFragment());
+                break;
+            /*Add Experience*/
             default:
             /*Redirect to Home*/
                 fragmentTransaction.replace(R.id.main_container, new HomeFragment());
@@ -156,5 +160,10 @@ public class UserActivity extends AppCompatActivity implements FragmentSwitchLis
         fragmentTransaction.commit();
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
+    }
+
+    @Override
+    public void switchFragment(int position, String user_id) {
+
     }
 }

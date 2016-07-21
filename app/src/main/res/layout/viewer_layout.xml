@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+	android:orientation="horizontal"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    card_view:cardElevation="10dp"
+    card_view:cardBackgroundColor="@color/colorLightest"
+    card_view:cardCornerRadius="10dp"
+    card_view:contentPadding="10dp"
+	>
+	<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/linearLayout1"
+        android:orientation="vertical">
+        <TextView
+            android:textSize="20sp"
+            android:id="@+id/listCompany"
+            android:layout_gravity="center_vertical"
+            android:text="Infroid Technologies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/hv1"
+            android:layout_below="@+id/listCompany"
+            android:background="@color/colorPrimaryDark">
+
+        </View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingLocation"
+            android:text="Location: "
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/hv1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listLocation"
+            android:text="Noida, Uttar Pradesh, India"
+            android:layout_toEndOf="@+id/headingLocation"
+            android:layout_below="@+id/hv1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingDOB"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listLocation"
+            android:text="Company Stared: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listDOB"
+            android:layout_below="@+id/listLocation"
+            android:layout_toEndOf="@+id/headingDOB"
+            android:hint="8 July 1965"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingProfession"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listDOB"
+            android:text="Profession: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listProfession"
+            android:layout_below="@+id/listDOB"
+            android:layout_toEndOf="@+id/headingProfession"
+            android:hint="Car Manufacturing"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingWebsite"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listProfession"
+            android:text="Website: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listWebsite"
+            android:layout_below="@+id/listProfession"
+            android:layout_toEndOf="@+id/headingWebsite"
+            android:hint="rajatsri.eu5.org"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/headingDescription"
+            android:ems="10"
+            android:textStyle="bold"
+            android:layout_below="@+id/listWebsite"
+            android:text="Description: "/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listDescription"
+            android:layout_below="@+id/listWebsite"
+            android:layout_toEndOf="@+id/headingDescription"
+            android:hint="Lead Developer and the manager of the company"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editViewer"
+            android:text="Edit"
+            android:ems="9"
+            android:tag=""
+            android:layout_margin="10dp"
+            android:layout_below="@+id/listDescription"
+            android:background="@color/colorSecondary"
+            android:textColor="@color/colorWhite"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewViewer"
+            android:text="View Profile"
+            android:layout_margin="10dp"
+            android:layout_below="@+id/listDescription"
+            android:layout_toEndOf="@+id/editViewer"
+            android:background="@color/colorIndigo"
+            android:ems="9"
+            android:tag=""
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/colorWhite"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

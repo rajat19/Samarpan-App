@@ -26,8 +26,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileViewerFragment extends Fragment {
-
+public class AdminViewViewerFragment extends Fragment {
     TextView name, date_of_birth, expertise_in, members, contact, contact_work, contact_other,
             contact_fax, contact_pager, address_permanent, address_alternate, email, email_work,
             email_other, skype, fb, google, linkedin, website, description;
@@ -37,11 +36,11 @@ public class ProfileViewerFragment extends Fragment {
     ServerLink link = new ServerLink();
     FragmentSwitchListener mCallback;
     ProgressDialog progressDialog;
-    Session session;
-    int session_user_id;
+    int tempUser;
     public String URL_PROFILE = link.URL_PROFILE;
     public String URL_PHOTO = link.URL_PHOTO;
-    public ProfileViewerFragment() {
+
+    public AdminViewViewerFragment() {
         // Required empty public constructor
     }
 
@@ -60,9 +59,6 @@ public class ProfileViewerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        session = new Session(getContext());
-        session_user_id = session.getUserId();
-        Log.e("userid", session_user_id+"");
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
         name = (TextView) view.findViewById(R.id.name);
         date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
@@ -92,7 +88,7 @@ public class ProfileViewerFragment extends Fragment {
                 mCallback.switchFragment(2);
             }
         });
-        new Profile().execute(session_user_id);
+        new Profile().execute(tempUser);
         return view;
     }
 
@@ -175,11 +171,11 @@ public class ProfileViewerFragment extends Fragment {
                         completeDetail.setDescription(userObj.getString("description"));
                         completeDetail.setPhoto(userObj.getString("photo"));
                     }
-                } 
+                }
                 catch (JSONException e) {
                     e.printStackTrace();
                 }
-            } 
+            }
             else {
                 Log.e("JSON Data", "Didn't receive any data from server!");
             }
