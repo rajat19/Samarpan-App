@@ -50,6 +50,19 @@
                 android:background="@color/colorBlue"
                 android:text="Change Image" />
 
+            <Button
+                android:id="@+id/savefoto"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/takefoto"
+                android:background="@color/colorTeal"
+                android:visibility="gone"
+                android:drawableRight="@android:drawable/ic_menu_upload"
+                android:text="Save as profile pic" />            
+
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -64,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_below="@+id/takefoto"
+                android:layout_below="@+id/savefoto"
                 android:text=""
                 android:textColor="@color/colorTeal"
                 android:textSize="20sp" />

@@ -71,12 +71,21 @@ public class MainActivity extends AppCompatActivity implements FragmentSwitchLis
                         break;
 
                     case R.id.register_id:
-                       fragmentTransaction.replace(R.id.main_container, new RegisterFragment());
-                       fragmentTransaction.commit();
-                       getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-                       getSupportActionBar().setCustomView(textView);
-                       item.setChecked(true);
-                       drawerLayout.closeDrawers();
+                        fragmentTransaction.replace(R.id.main_container, new RegisterFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                        getSupportActionBar().setCustomView(textView);
+                        item.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.contact_id:
+                        fragmentTransaction.replace(R.id.main_container, new ContactUsFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+                        getSupportActionBar().setCustomView(textView);
+                        item.setChecked(true);
+                        drawerLayout.closeDrawers();
                         break;
                 }
                 return true;
@@ -104,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements FragmentSwitchLis
                 break;
             case 3:
             /*Forgot Password*/
-                fragmentTransaction.replace(R.id.main_container, new RegisterFragment());
+                fragmentTransaction.replace(R.id.main_container, new ForgotPasswordFragment());
                 break;
             default:
             /*Redirect to Home*/

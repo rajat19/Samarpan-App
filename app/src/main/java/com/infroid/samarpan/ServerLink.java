@@ -5,6 +5,8 @@ public class ServerLink {
     public String MOBILE_ADDRESS;
     public String URL_LOGIN; //login email and password
     public String URL_REGISTER; // register initial details
+    public String URL_FORGOT;
+    public String URL_CONTACT;
     public String URL_PHOTO; // link to webfolder containing photos
     public String URL_ADMIN_VIEWERS;
     public String URL_ADMIN_CITIZENS;
@@ -26,12 +28,14 @@ public class ServerLink {
     public String SEARCH_COMPANY_NAME; // for senior citizen
 
     public ServerLink() {
-    	SERVER_ADDRESS = "http://192.168.200.2/Samarpan/public/";
+    	SERVER_ADDRESS = "http://192.168.198.2/Samarpan/public/";
     	URL_PHOTO = SERVER_ADDRESS + "photo/";
         URL_CV = SERVER_ADDRESS + "cv/";
         MOBILE_ADDRESS = SERVER_ADDRESS + "mobile/";
         URL_LOGIN = MOBILE_ADDRESS + "login";
         URL_REGISTER = MOBILE_ADDRESS + "register";
+        URL_FORGOT = MOBILE_ADDRESS + "forgot/password";
+        URL_CONTACT = MOBILE_ADDRESS + "contact";
         URL_ADMIN_VIEWERS = MOBILE_ADDRESS + "admin/search_viewers";
         URL_ADMIN_CITIZENS = MOBILE_ADDRESS + "admin/search_citizens";
         URL_ADMIN_EDIT = MOBILE_ADDRESS + "admin/update";

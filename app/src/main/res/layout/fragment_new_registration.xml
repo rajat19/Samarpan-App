@@ -542,6 +542,7 @@
                     android:id="@+id/btnCV"/> -->
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -551,13 +552,16 @@
             card_view:cardElevation="10dp"
             card_view:contentPadding="10dp">
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit Details"
+                android:text="Save Details"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/colorWhite"
                 android:background="@color/colorSecondary"
                 android:id="@+id/btnSubmit"
-                android:ems="20"/>
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:drawableRight="@android:drawable/ic_menu_save"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

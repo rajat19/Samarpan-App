@@ -1,6 +1,8 @@
 package com.infroid.samarpan;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +17,10 @@ public class ViewerAdapter extends RecyclerView.Adapter<ViewerAdapter.MyViewHold
 
     private LayoutInflater layoutInflater;
     List<ViewerInfo> data = Collections.emptyList();
-    AdminSearchViewerFragment obj = new AdminSearchViewerFragment();
-    public ViewerAdapter(Context context,List<ViewerInfo> data) {
+    AdminSearchViewerFragment adminfragment;
+    public ViewerAdapter(Context context,List<ViewerInfo> data, AdminSearchViewerFragment frag) {
         this.data = data;
+        this.adminfragment = frag;
         layoutInflater = LayoutInflater.from(context);
 
     }
@@ -42,14 +45,14 @@ public class ViewerAdapter extends RecyclerView.Adapter<ViewerAdapter.MyViewHold
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obj.mCallback.switchFragment(5, current.user_id);
+                adminfragment.switchFragments(5, current.user_id);
             }
         });
 
         holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obj.mCallback.switchFragment(6, current.user_id);
+                adminfragment.switchFragments(6, current.user_id);
             }
         });
     }

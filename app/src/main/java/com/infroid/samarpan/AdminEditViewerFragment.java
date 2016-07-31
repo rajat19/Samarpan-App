@@ -41,7 +41,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
             city_alternate, state_alternate, country_alternate, pincode_alternate, email_work, email_other,
             fb, google, linkedin, skype, website;
     ServerLink link = new ServerLink();
-    int tempUser;
+    String tempUser;
     FragmentSwitchListener mCallback;
     Details completeDetail = new Details();
     public String URL_EDIT = link.URL_ADMIN_EDIT;
@@ -69,11 +69,12 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_edit_viewer, container, false);
+        tempUser = getArguments().getString("user_id");
         btnDOB = (Button) view.findViewById(R.id.btnDOB);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
         date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
-        email = (EditText) view.findViewById(R.id.email);
-        contact = (EditText) view.findViewById(R.id.contact);
+        email = (EditText) view.findViewById(R.id.fillEmail);
+        contact = (EditText) view.findViewById(R.id.fillContact);
         firstname = (EditText) view.findViewById(R.id.fillFirstName);
         description = (EditText) view.findViewById(R.id.description);
         expertise_in = (EditText) view.findViewById(R.id.expertise_in);
@@ -99,7 +100,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
         linkedin = (EditText) view.findViewById(R.id.linkedin);
         skype = (EditText) view.findViewById(R.id.skype);
         website = (EditText) view.findViewById(R.id.website);
-        new Profile().execute(tempUser);
+        new Profile().execute(Integer.parseInt(tempUser));
         btnDOB.setOnClickListener(this);
         btnSubmit.setOnClickListener(this);
         return view;
@@ -266,6 +267,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
 
             ServiceHandler jsonParser = new ServiceHandler();
             Log.e("Address = ", URL_PROFILE);
+            Log.e("userid", uid+"");
             String json = jsonParser.makeServiceCall(URL_PROFILE, ServiceHandler.GET, params);
             Log.e("Response", "= "+json);
             if (json != null) {
@@ -321,6 +323,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
             super.onPostExecute(s);
             if(flag == 1) {
                 setCurrentDateOnView();
+                Log.e("email my", completeDetail.getEmail());
                 fillProfile(completeDetail);
             }
             else
@@ -336,7 +339,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
         @Override
         protected Void doInBackground(Void ...arg) {
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("currentuserid", Integer.toString(tempUser)));
+            params.add(new BasicNameValuePair("currentuserid", tempUser));
             params.add(new BasicNameValuePair("email", completeDetail.getEmail()));
             params.add(new BasicNameValuePair("contact", completeDetail.getContact()));
             params.add(new BasicNameValuePair("firstname", completeDetail.getFirstname()));

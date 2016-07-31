@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -205,44 +207,16 @@ public class ProfileFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            if(progressDialog.isShowing())
+                progressDialog.dismiss();
             if(flag == 1) {
-                new DownloadImage().execute(completeDetail.getPhoto());
+                // new DownloadImage().execute(completeDetail.getPhoto());
+                String imageServerPath = URL_PHOTO + completeDetail.getPhoto();
+                Picasso.with(getContext()).load(imageServerPath).into(photo);
                 fillProfile(completeDetail);
             }
             else
                 Toast.makeText(getActivity(), "Didn't receive any data from server!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            String urlDisplay = URL_PHOTO + urls[0];
-            Log.e("url = ", urlDisplay);
-            Bitmap mIcon = null;
-            try {
-                InputStream in = new java.net.URL(urlDisplay).openStream();
-                mIcon = BitmapFactory.decodeStream(in);
-            }
-            catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            photo.setImageBitmap(bitmap);
-            if(progressDialog.isShowing())
-                progressDialog.dismiss();
         }
     }
 }

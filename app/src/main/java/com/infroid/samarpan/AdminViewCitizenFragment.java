@@ -38,7 +38,7 @@ public class AdminViewCitizenFragment extends Fragment {
     ServerLink link = new ServerLink();
     FragmentSwitchListener mCallback;
     ProgressDialog progressDialog;
-    int tempUser;
+    String tempUser;
     public String URL_PROFILE = link.URL_PROFILE;
     public String URL_PHOTO = link.URL_PHOTO;
     public AdminViewCitizenFragment() {
@@ -61,6 +61,7 @@ public class AdminViewCitizenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_admin_view_citizen, container, false);
+       tempUser = getArguments().getString("user_id");
         name = (TextView) view.findViewById(R.id.name);
         date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
         expertise_in = (TextView) view.findViewById(R.id.expertise_in);
@@ -124,7 +125,7 @@ public class AdminViewCitizenFragment extends Fragment {
         biography.setText(details.getBiography());
     }
 
-    private class Profile extends AsyncTask<Integer, Void, String> {
+    private class Profile extends AsyncTask<String, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -137,10 +138,10 @@ public class AdminViewCitizenFragment extends Fragment {
 
         int flag = 0;
         @Override
-        protected String doInBackground(Integer... arg) {
-            int uid = arg[0];
+        protected String doInBackground(String... arg) {
+            String uid = arg[0];
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("id", Integer.toString(uid)));
+            params.add(new BasicNameValuePair("id", uid));
 
             ServiceHandler jsonParser = new ServiceHandler();
             Log.e("Address = ", URL_PROFILE);
@@ -196,47 +197,16 @@ public class AdminViewCitizenFragment extends Fragment {
             return json;
         }
 
-        @Override
+           @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             if(flag == 1) {
-                new DownloadImage().execute(completeDetail.getPhoto());
+                String imageServerPath = URL_PHOTO + completeDetail.getPhoto();
+                Picasso.with(getContext()).load(imageServerPath).into(photo);
                 fillProfile(completeDetail);
             }
             else
                 Toast.makeText(getActivity(), "Didn't receive any data from server!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... urls) {
-            String urlDisplay = URL_PHOTO + urls[0];
-            Log.e("url = ", urlDisplay);
-            Bitmap mIcon = null;
-            try {
-                InputStream in = new java.net.URL(urlDisplay).openStream();
-                mIcon = BitmapFactory.decodeStream(in);
-            }
-            catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            photo.setImageBitmap(bitmap);
-            if(progressDialog.isShowing())
-                progressDialog.dismiss();
         }
     }
 }

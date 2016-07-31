@@ -15,17 +15,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class UserActivity extends AppCompatActivity implements FragmentSwitchListener{
 
     Toolbar toolbar;
-    TextView textView;
+    TextView textView, navname, navmail;
+    ImageView navpic;
     DrawerLayout drawerLayout;
     Session session;
+    ServerLink link = new ServerLink();
+    String URL_PHOTO = link.URL_PHOTO;
     ActionBarDrawerToggle actionBarDrawerToggle;
     FragmentTransaction fragmentTransaction;
     NavigationView navigationView;
+    View headerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +45,7 @@ public class UserActivity extends AppCompatActivity implements FragmentSwitchLis
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main_container, new HomeFragment());
+        fragmentTransaction.add(R.id.main_container, new UserHomeFragment());
         fragmentTransaction.commit();
 
         textView = new TextView(getApplicationContext());
@@ -50,6 +57,16 @@ public class UserActivity extends AppCompatActivity implements FragmentSwitchLis
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        headerLayout = navigationView.getHeaderView(0);
+        navname = (TextView) headerLayout.findViewById(R.id.navname);
+        navmail = (TextView) headerLayout.findViewById(R.id.navmail);
+        navpic = (ImageView) headerLayout.findViewById(R.id.navpic);
+        String imageServerPath = URL_PHOTO + session.getUserImage();
+        Picasso.with(getApplicationContext()).load(imageServerPath).into(navpic);
+        String uname = session.getUserName();
+        String fname = uname.substring(0, uname.indexOf(" "));
+        navname.setText(fname);
+        navmail.setText(session.getUserEmail());
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -57,7 +74,7 @@ public class UserActivity extends AppCompatActivity implements FragmentSwitchLis
 
                     case R.id.home_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+                        fragmentTransaction.replace(R.id.main_container, new UserHomeFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);
@@ -130,6 +147,21 @@ public class UserActivity extends AppCompatActivity implements FragmentSwitchLis
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

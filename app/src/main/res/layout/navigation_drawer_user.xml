@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:padding="10dp"
+    android:background="@color/colorPrimary">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:id="@+id/navpic"
+        android:src="@drawable/f1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/navname"
+        android:layout_marginTop="20dp"
+        android:textSize="17dp"
+        android:layout_toRightOf="@+id/navpic"
+        android:text="Rajat"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navname"
+        android:textStyle="italic"
+        android:id="@+id/navmail"
+        android:layout_marginTop="10dp"
+        android:textSize="15dp"
+        android:layout_toRightOf="@+id/navpic"
+        android:text="rajatsri94@gmail.com"/>
+</RelativeLayout>

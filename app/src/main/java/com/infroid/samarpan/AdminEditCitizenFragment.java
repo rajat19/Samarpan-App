@@ -71,15 +71,14 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_edit_citizen, container, false);
+        tempUser = getArguments().getString("user_id");
         btnDOB = (Button) view.findViewById(R.id.btnDOB);
         btnRetire = (Button) view.findViewById(R.id.btnRetire);
-        // btnPhoto = (Button) view.findViewById(R.id.btnPhoto);
-        // btnCV = (Button) view.findViewById(R.id.btnCV);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
         date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
         retirement = (TextView) view.findViewById(R.id.retirement);
-        email = (EditText) view.findViewById(R.id.email);
-        contact = (EditText) view.findViewById(R.id.contact);
+        email = (EditText) view.findViewById(R.id.fillEmail);
+        contact = (EditText) view.findViewById(R.id.fillContact);
         firstname = (EditText) view.findViewById(R.id.fillFirstName);
         middlename = (EditText) view.findViewById(R.id.fillMiddleName);
         lastname = (EditText) view.findViewById(R.id.fillLastName);

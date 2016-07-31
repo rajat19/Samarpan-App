@@ -86,6 +86,10 @@ public class AdminSearchViewerFragment extends Fragment {
         return companiesList;
     }
 
+    public void switchFragments(int pos, String user_id) {
+        mCallback.switchFragment(pos, user_id);
+    }
+
     public static List<ViewerInfo> getData(List<Details> viewerList) {
         int l = viewerList.size();
         List<ViewerInfo> data = new ArrayList<>();
@@ -104,7 +108,7 @@ public class AdminSearchViewerFragment extends Fragment {
     }
 
     public void populateRecycler() {
-        adapter = new ViewerAdapter(getActivity(), getData(viewerList));
+        adapter = new ViewerAdapter(getActivity(), getData(viewerList), AdminSearchViewerFragment.this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         viewerList.clear();

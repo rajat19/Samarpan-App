@@ -25,6 +25,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.infroid.samarpan.AndroidMultiPartEntity.ProgressListener;
+import com.squareup.picasso.Picasso;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -33,6 +34,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -52,7 +54,7 @@ import java.util.Locale;
 public class UploadPhotoFragment extends Fragment {
 
     ImageView userpic;
-    Button takefoto;
+    Button takefoto, savefoto;
     TextView txtPercentage;
     ProgressBar progressBar;
     ProgressDialog progressDialog;
@@ -80,6 +82,7 @@ public class UploadPhotoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_upload_photo, container, false);
         userpic = (ImageView) view.findViewById(R.id.userpic);
         takefoto = (Button) view.findViewById(R.id.takefoto);
+        savefoto = (Button) view.findViewById(R.id.savefoto);
         txtPercentage = (TextView) view.findViewById(R.id.txtPercentage);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         session = new Session(getContext());
@@ -93,6 +96,12 @@ public class UploadPhotoFragment extends Fragment {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 captureImage();
+            }
+        });
+        savefoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new UploadFileToServer().execute();
             }
         });
         return view;
@@ -116,7 +125,7 @@ public class UploadPhotoFragment extends Fragment {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
         // start the image capture Intent
-        startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+        getActivity().startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
     }
 
     @Override
@@ -124,32 +133,32 @@ public class UploadPhotoFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putParcelable("file_uri", fileUri);
     }
-//
+
 //    @Override
 //    public void onViewStateRestored(Bundle savedInstanceState) {
 //        super.onViewStateRestored(savedInstanceState);
-//        if(savedInstanceState.getParcelable("file_uri").toString().equals(null)) {
-//            fileUri = savedInstanceState.getParcelable("file_uri");
-//        }
+//        fileUri = savedInstanceState.getParcelable("file_uri");
 //    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         // if the result is capturing Image
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e("onresult", "entered");
         if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-
+                Log.e("result", "ok");
                 // successfully captured the image
                 // launching upload activity
                 launchUploadActivity(true);
 
             } else if (resultCode == Activity.RESULT_CANCELED) {
-
+                Log.e("result", "cancelled");
                 // user cancelled Image capture
                 Toast.makeText(getActivity(), "User cancelled image capture", Toast.LENGTH_SHORT).show();
 
             } else {
+                Log.e("result", "failed");
                 // failed to capture image
                 Toast.makeText(getActivity(), "Sorry! Failed to capture image", Toast.LENGTH_SHORT).show();
             }
@@ -162,19 +171,22 @@ public class UploadPhotoFragment extends Fragment {
 //        i.putExtra("isImage", isImage);
 //        startActivity(i);
         String filePath = fileUri.getPath();
-        this.isImage  = isImage;
+        Log.e("inside d", "sdda");
         if (filePath != null) {
             // Displaying the image or video on the screen
             previewMedia(isImage);
+            savefoto.setVisibility(View.VISIBLE);
+
+            Log.e("Filepath", filePath);
         } else {
             Toast.makeText(getActivity(), "Sorry, file path is missing!", Toast.LENGTH_LONG).show();
         }
-        new UploadFileToServer().execute();
+
     }
 
     private void previewMedia(boolean isImage) {
         // Checking whether captured media is image or video
-        if (this.isImage) {
+        if (isImage) {
             userpic.setVisibility(View.VISIBLE);
             // bimatp factory
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -184,7 +196,7 @@ public class UploadPhotoFragment extends Fragment {
             options.inSampleSize = 8;
 
             final Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
-
+            Log.e("bmao", bitmap.toString());
             userpic.setImageBitmap(bitmap);
         }
     }
@@ -271,14 +283,13 @@ public class UploadPhotoFragment extends Fragment {
                             }
 
                         });
-
+                Log.e("file", filePath);
                 File sourceFile = new File(filePath);
 
                 // Adding file data to http body
-                entity.addPart("image", new FileBody(sourceFile));
-
+                entity.addPart("photo", new FileBody(sourceFile));
+                entity.addPart("currentuserid", new StringBody(Integer.toString(session.getUserId())));
                 // Extra parameters if you want to pass to server
-
 
                 totalSize = entity.getContentLength();
                 httppost.setEntity(entity);
@@ -364,8 +375,12 @@ public class UploadPhotoFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            if(progressDialog.isShowing())
+                progressDialog.dismiss();
             if(flag == 1) {
-                new DownloadImage().execute(photoname);
+//                new DownloadImage().execute(photoname);
+                String imageServerPath = URL_PHOTO + photoname;
+                Picasso.with(getContext()).load(imageServerPath).into(userpic);
             }
             else
                 Toast.makeText(getActivity(), "Didn't receive any data from server!", Toast.LENGTH_SHORT).show();
@@ -377,6 +392,9 @@ public class UploadPhotoFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Downloading profile picture.....");
+            progressDialog.show();
         }
 
         @Override

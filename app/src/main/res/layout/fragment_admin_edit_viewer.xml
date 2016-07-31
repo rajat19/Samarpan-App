@@ -51,6 +51,7 @@
                 </View>
 
                 <EditText
+                    android:drawableLeft="@android:drawable/sym_action_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Primary Email Address"
@@ -59,6 +60,7 @@
                     android:id="@+id/fillEmail"/>
 
                 <EditText
+                    android:drawableLeft="@android:drawable/ic_menu_call"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Primary Contact No,"
@@ -119,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/fillFirstName"
                     android:layout_toEndOf="@+id/btnDOB"
+                    android:layout_toRightOf="@+id/btnDOB"
                     android:id="@+id/date_of_birth"
                     android:hint="DD-MM-YYYY"
                     android:textSize="20sp"
@@ -272,6 +275,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/address_permanent"
                     android:layout_toEndOf="@+id/city_permanent"
+                    android:layout_toRightOf="@+id/city_permanent"
                     android:hint="State"
                     android:id="@+id/state_permanent"/>
 
@@ -287,6 +291,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/city_permanent"
                     android:hint="Pincode"
+                    android:layout_toRightOf="@+id/country_permanent"
                     android:inputType="numberDecimal"
                     android:layout_toEndOf="@+id/country_permanent"
                     android:id="@+id/pincode_permanent"/>
@@ -342,6 +347,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/address_alternate"
                     android:layout_toEndOf="@+id/city_alternate"
+                    android:layout_toRightOf="@+id/city_alternate"
                     android:hint="State"
                     android:id="@+id/state_alternate"/>
 
@@ -358,6 +364,7 @@
                     android:layout_below="@+id/city_alternate"
                     android:hint="Pincode"
                     android:inputType="numberDecimal"
+                    android:layout_toRightOf="@+id/country_alternate"
                     android:layout_toEndOf="@+id/country_alternate"
                     android:id="@+id/pincode_alternate"/>
             </RelativeLayout>
@@ -439,13 +446,16 @@
             card_view:cardElevation="10dp"
             card_view:contentPadding="10dp">
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:drawableRight="@android:drawable/ic_menu_save"
                 android:layout_height="wrap_content"
-                android:text="Submit Details"
+                android:padding="10dp"
+                android:textSize="16dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Save Details"
                 android:textColor="@color/colorWhite"
                 android:background="@color/colorSecondary"
-                android:id="@+id/btnSubmit"
-                android:ems="20"/>
+                android:id="@+id/btnSubmit"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

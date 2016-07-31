@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +36,7 @@ import java.util.regex.Pattern;
 public class LoginFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
 
-    TextView textView;
+    TextView textView, btnReg;
     EditText email, password;
     Button btnLogin, btnRegister, btnForgot;
     String emailString, passwordString;
@@ -41,6 +44,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     ProgressDialog progressDialog;
     ServerLink link = new ServerLink();
     public String URL_LOGIN = link.URL_LOGIN;
+    public String SERVER_ADDRESS = link.SERVER_ADDRESS;
     private Session session;
     private static final Pattern EMAIL_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     public LoginFragment() {
@@ -77,11 +81,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         password = (EditText) view.findViewById(R.id.password);
         btnLogin = (Button) view.findViewById(R.id.btnLogin);
         btnForgot = (Button) view.findViewById(R.id.btnForgot);
-        btnRegister = (Button) view.findViewById(R.id.btnRegister);
+        btnReg = (TextView) view.findViewById(R.id.btnRegister);
+//        btnRegister = (Button) view.findViewById(R.id.btnRegister);
 
         btnLogin.setOnClickListener(this);
         btnForgot.setOnClickListener(this);
-        btnRegister.setOnClickListener(this);
+        btnReg.setOnClickListener(this);
     }
 
     @Override
@@ -139,18 +144,43 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         int userid = 0;
         String username = "";
         String usertype = "";
+        String usermail = "";
+        String userimage = "";
+        String CSRFTOKEN;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog = new ProgressDialog(getActivity());
+            progressDialog.setMessage("Verifying Login Details");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
         }
 
         @Override
         protected Void doInBackground(String... arg) {
+//            HttpClient httpClient = new DefaultHttpClient();
+//            try {
+//                // Get the CSRF token
+//                httpClient.execute(new HttpGet(SERVER_ADDRESS));
+//                CookieStore cookieStore = httpClient.getParams().getParameter("cookie");
+//                List<Cookie> cookies = cookieStore.getCookies();
+//
+//                for (Cookie cookie : cookies) {
+//                    if (cookie.getName().equals("XSRF-TOKEN")) {
+//                        CSRFTOKEN = cookie.getValue();
+//                    }
+//                }
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
             String stEmail = arg[0];
             String stPassword = arg[1];
 
             List<NameValuePair> params = new ArrayList<>();
+//            params.add(new BasicNameValuePair("_token", CSRFTOKEN));
             params.add(new BasicNameValuePair("email", stEmail));
             params.add(new BasicNameValuePair("password", stPassword));
 
@@ -177,11 +207,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                                 userid = userObj.getInt("id");
                                 usertype = userObj.getString("type");
                                 username = userObj.getString("name");
+                                usermail = userObj.getString("email");
+
                                 session.setUserId(userid);
                                 session.setUserName(username);
                                 session.setUserType(usertype);
+                                session.setUserEmail(usermail);
                                 session.setLogInfo(1);
                             }
+                            userimage = jsonObj.getString("photo");
+                            session.setUserImage(userimage);
                         }
                     }
                 } 
@@ -199,9 +234,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            if(progressDialog.isShowing())
+                progressDialog.dismiss();
             if(isLoggedIn == 1) {
                 Log.e("logg", isLoggedIn+" "+username);
-                Toast.makeText(getActivity(), "Welcome "+username, Toast.LENGTH_SHORT);
+                Toast.makeText(getActivity(), "Welcome "+username, Toast.LENGTH_SHORT).show();
                 Log.e("usertype", session.getUserType());
                 if(session.getUserType().equals("0")) {
                     Intent i = new Intent(getContext(), AdminActivity.class);
@@ -216,7 +253,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                     startActivity(i);
                 }
                 if(session.getUserType().equals("3")) {
-                    Toast.makeText(getActivity(), "Bulk Upload is not available for App, Please visit the website", Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(), "Bulk Upload is not available for App, Please visit the website Samarpan.com", Toast.LENGTH_SHORT).show();
                     session.setLogInfo(0);
                 }
             }

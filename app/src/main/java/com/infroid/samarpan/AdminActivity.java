@@ -13,19 +13,27 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class AdminActivity extends AppCompatActivity implements FragmentSwitchListener{
 
     Toolbar toolbar;
-    TextView textView;
+    TextView textView, navname, navmail;
+    ImageView navpic;
     DrawerLayout drawerLayout;
     Session session;
+    ServerLink link = new ServerLink();
+    String URL_PHOTO = link.URL_PHOTO;
     ActionBarDrawerToggle actionBarDrawerToggle;
     FragmentTransaction fragmentTransaction;
     NavigationView navigationView;
+    View headerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +58,16 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        headerLayout = navigationView.getHeaderView(0);
+        navname = (TextView) headerLayout.findViewById(R.id.navname);
+        navmail = (TextView) headerLayout.findViewById(R.id.navmail);
+        navpic = (ImageView) headerLayout.findViewById(R.id.navpic);
+        String imageServerPath = URL_PHOTO + session.getUserImage();
+        Picasso.with(getApplicationContext()).load(imageServerPath).into(navpic);
+        String uname = session.getUserName();
+        String fname = uname.substring(0, uname.indexOf(" "));
+        navname.setText(fname);
+        navmail.setText(session.getUserEmail());
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -67,7 +85,7 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
 
                     case R.id.senior_citizen_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new NewRegistrationFragment());
+                        fragmentTransaction.replace(R.id.main_container, new AdminSearchCitizenFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);
@@ -85,22 +103,22 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
                         drawerLayout.closeDrawers();
                         break;
 
-                    case R.id.department_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new EditDetailsFragment());
-                        fragmentTransaction.commit();
-                        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-                        getSupportActionBar().setCustomView(textView);
-                        item.setChecked(true);
-                        drawerLayout.closeDrawers();
-                        break;
+//                    case R.id.department_id:
+//                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                        fragmentTransaction.replace(R.id.main_container, new EditDetailsFragment());
+//                        fragmentTransaction.commit();
+//                        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//                        getSupportActionBar().setCustomView(textView);
+//                        item.setChecked(true);
+//                        drawerLayout.closeDrawers();
+//                        break;
                     case R.id.logout_id:
                         session.setLogInfo(0);
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(i);
                         finish();
                         break;
-                }
+            }
                 return true;
             }
         });
@@ -119,19 +137,22 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
 
     @Override
     public void switchFragment(int id, String user_id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("user_id", user_id);
+        Log.e("bundle", user_id);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch(id) {
             case 1:
                 /*Edit Details*/
                 AdminEditCitizenFragment o = new AdminEditCitizenFragment();
-                o.tempUser = user_id;
-                fragmentTransaction.replace(R.id.main_container, new AdminEditCitizenFragment());
+                o.setArguments(bundle);
+                fragmentTransaction.replace(R.id.main_container, o);
                 break;
             case 2:
                 /*View Details*/
                 AdminViewCitizenFragment o2 = new AdminViewCitizenFragment();
-                o2.tempUser = Integer.parseInt(user_id);
-                fragmentTransaction.replace(R.id.main_container, new AdminViewCitizenFragment());
+                o2.setArguments(bundle);
+                fragmentTransaction.replace(R.id.main_container, o2);
                 break;
             case 3:
                 /*Senior Citizen Lists*/
@@ -142,16 +163,18 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
                 break;
             case 5:
                 AdminEditViewerFragment o3 = new AdminEditViewerFragment();
-                o3.tempUser = Integer.parseInt(user_id);
+                o3.setArguments(bundle);
                 /*Edit Viewer Details*/
-                fragmentTransaction.replace(R.id.main_container, new AdminResultCitizenFragment());
+                fragmentTransaction.replace(R.id.main_container, o3);
                 break;
             case 6:
                 AdminViewViewerFragment o4 = new AdminViewViewerFragment();
-                o4.tempUser = Integer.parseInt(user_id);
+                o4.setArguments(bundle);
                 /*View Viewer Details*/
-                fragmentTransaction.replace(R.id.main_container, new AdminResultCitizenFragment());
+                fragmentTransaction.replace(R.id.main_container, o4);
                 break;
+            case 7:
+                fragmentTransaction.replace(R.id.main_container, new AdminSearchCitizenFragment());
             default:
             /*Redirect to Home*/
                 fragmentTransaction.replace(R.id.main_container, new HomeFragment());

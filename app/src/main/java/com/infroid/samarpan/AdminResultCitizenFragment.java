@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +27,7 @@ public class AdminResultCitizenFragment extends Fragment {
     public static WorkExperiences experienceFind;
     private CitizenAdapter adapter;
     ServerLink link = new ServerLink();
+    FloatingActionButton fab;
     FragmentSwitchListener mCallback;
     ProgressDialog progressDialog;
     public String URL_ADMIN_CITIZENS = link.URL_ADMIN_CITIZENS;
@@ -51,7 +53,15 @@ public class AdminResultCitizenFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_admin_result_citizen, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewer);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
         new SeniorCitizen().execute();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallback.switchFragment(7, "");
+            }
+        });
         return view;
     }
 
@@ -73,8 +83,12 @@ public class AdminResultCitizenFragment extends Fragment {
         return data;
     }
 
+    public void switchFragments(int pos, String user_id) {
+        mCallback.switchFragment(pos, user_id);
+    }
+
     public void populateRecycler() {
-        adapter = new CitizenAdapter(getActivity(), getData(citizenList));
+        adapter = new CitizenAdapter(getActivity(), getData(citizenList), AdminResultCitizenFragment.this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         citizenList.clear();

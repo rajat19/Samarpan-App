@@ -101,9 +101,13 @@
                     android:layout_below="@+id/rank"/>
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnSearch"
+                    android:textSize="16dp"
+                    android:drawableRight="@android:drawable/ic_menu_search"
                     android:background="@color/colorSecondary"
                     android:text="Search"
                     android:layout_below="@+id/position"

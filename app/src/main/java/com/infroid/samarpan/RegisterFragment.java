@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
-    TextView textView;
+    TextView textView, btnLog;
     EditText name, email, contact, password, password_confirmation;
     Button btnLogin, btnRegister;
     String sname, semail, scontact, spassword, spassword_confirmation;
@@ -73,11 +73,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         contact = (EditText) view.findViewById(R.id.contact);
         password = (EditText) view.findViewById(R.id.password);
         password_confirmation = (EditText) view.findViewById(R.id.password_confirmation);
-        btnLogin = (Button) view.findViewById(R.id.btnLogin);
+//        btnLogin = (Button) view.findViewById(R.id.btnLogin);
+        btnLog = (TextView) view.findViewById(R.id.btnLogin);
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(this);
-        btnLogin.setOnClickListener(this);
+        btnLog.setOnClickListener(this);
     }
 
     @Override
@@ -118,13 +119,16 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     flag++;
                 }
 
-                if(spassword != spassword_confirmation) {
+                if(spassword.equals(spassword_confirmation)) {
+//                    Toast.makeText(getActivity(),"Matc", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     Toast.makeText(getActivity(), "Confirmed Password do not match", Toast.LENGTH_SHORT).show();
                     flag++;
                 }
                 if(flag == 0) {
                     /*Start async task to login the user*/
-                    String arr[] = {sname, };
+                    String arr[] = {sname, semail, scontact, spassword, spassword_confirmation};
                     new Register().execute(arr);
                 }
                 break;

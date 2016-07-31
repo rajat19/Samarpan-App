@@ -47,4 +47,22 @@ public class Session {
         String type = prefs.getString("type", "");
         return type;
     }
+
+    public void setUserEmail(String email) {
+        prefs.edit().putString("email", email).commit();
+    }
+
+    public String getUserEmail() {
+        String email = prefs.getString("email", "");
+        return email;
+    }
+
+    public void setUserImage(String image) {
+        prefs.edit().putString("image", image).commit();
+    }
+
+    public String getUserImage() {
+        String image = prefs.getString("image", "");
+        return image;
+    }
 }

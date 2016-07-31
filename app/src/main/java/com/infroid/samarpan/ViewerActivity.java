@@ -12,18 +12,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class ViewerActivity extends AppCompatActivity implements FragmentSwitchListener{
 
     Toolbar toolbar;
-    TextView textView;
+    TextView textView, navname, navmail;
+    ImageView navpic;
     DrawerLayout drawerLayout;
+    ServerLink link = new ServerLink();
+    String URL_PHOTO = link.URL_PHOTO;
     ActionBarDrawerToggle actionBarDrawerToggle;
     FragmentTransaction fragmentTransaction;
     NavigationView navigationView;
     Typeface type;
     Session session;
+    View headerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +55,16 @@ public class ViewerActivity extends AppCompatActivity implements FragmentSwitchL
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(textView);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        headerLayout = navigationView.getHeaderView(0);
+        navname = (TextView) headerLayout.findViewById(R.id.navname);
+        navmail = (TextView) headerLayout.findViewById(R.id.navmail);
+        navpic = (ImageView) headerLayout.findViewById(R.id.navpic);
+        String imageServerPath = URL_PHOTO + session.getUserImage();
+        Picasso.with(getApplicationContext()).load(imageServerPath).into(navpic);
+        String uname = session.getUserName();
+        String fname = uname.substring(0, uname.indexOf(" "));
+        navname.setText(fname);
+        navmail.setText(session.getUserEmail());
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {

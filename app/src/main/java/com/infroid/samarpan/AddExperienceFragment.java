@@ -37,7 +37,7 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
     Button btnFrom, btnTo, btnAdd;
     TextView from, to;
     Session session;
-    DatePickerFragment picker;
+    DatePickerFragment picker = new DatePickerFragment();
     FragmentSwitchListener mCallback;
     Bundle args;
     WorkExperiences experienceNew = new WorkExperiences();
@@ -100,6 +100,7 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
                 args.putInt("year", year);
                 args.putInt("month", month);
                 args.putInt("day", day);
+                Log.e("time", year + month + day+"");
                 picker.setArguments(args);
                 picker.setCallback(onDateF);
                 picker.show(getFragmentManager(), "datePicker");

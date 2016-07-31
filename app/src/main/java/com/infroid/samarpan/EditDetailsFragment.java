@@ -115,6 +115,7 @@
             maleRadio = (AppCompatRadioButton) view.findViewById(R.id.genderMale);
             femaleRadio = (AppCompatRadioButton) view.findViewById(R.id.genderFemale);
             otherRadio = (AppCompatRadioButton) view.findViewById(R.id.genderOther);
+            setCurrentDateOnView();
             new Profile().execute(session.getUserId());
             btnDOB.setOnClickListener(this);
             btnRetire.setOnClickListener(this);

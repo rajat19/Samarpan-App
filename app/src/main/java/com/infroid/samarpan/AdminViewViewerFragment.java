@@ -36,7 +36,7 @@ public class AdminViewViewerFragment extends Fragment {
     ServerLink link = new ServerLink();
     FragmentSwitchListener mCallback;
     ProgressDialog progressDialog;
-    int tempUser;
+    String tempUser;
     public String URL_PROFILE = link.URL_PROFILE;
     public String URL_PHOTO = link.URL_PHOTO;
 
@@ -60,6 +60,7 @@ public class AdminViewViewerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
+        tempUser = getArguments().getString("user_id");
         name = (TextView) view.findViewById(R.id.name);
         date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
         expertise_in = (TextView) view.findViewById(R.id.expertise_in);
@@ -116,8 +117,9 @@ public class AdminViewViewerFragment extends Fragment {
         description.setText(details.getDescription());
     }
 
-    private class Profile extends AsyncTask<Integer, Void, String> {
+    private class Profile extends AsyncTask<String, Void, String> {
 
+        int flag = 0;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -127,12 +129,12 @@ public class AdminViewViewerFragment extends Fragment {
             progressDialog.show();
         }
 
-        int flag = 0;
         @Override
-        protected String doInBackground(Integer... arg) {
-            int uid = arg[0];
+        protected String doInBackground(String... arg) {
+            String uid = arg[0];
+            Log.e("userid async", uid+"");
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("id", Integer.toString(uid)));
+            params.add(new BasicNameValuePair("id", uid));
 
             ServiceHandler jsonParser = new ServiceHandler();
             Log.e("Address = ", URL_PROFILE);

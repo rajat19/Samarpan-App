@@ -45,6 +45,9 @@
                     android:layout_gravity="center_horizontal"
                     android:id="@+id/btnSearch"
                     android:text="Search"
+                    android:padding="10dp"
+                    android:textSize="16dp"
+                    android:drawableRight="@android:drawable/ic_menu_search"
                     android:background="@color/colorTeal"
                     android:textColor="@color/colorWhite"/>
             </LinearLayout>

@@ -15,10 +15,6 @@
             android:title="Profile Viewer">
         </item>
         <item
-            android:id="@+id/department_id"
-            android:title="Department">
-        </item>
-        <item
             android:id="@+id/logout_id"
             android:title="Logout">
         </item>

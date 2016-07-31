@@ -1,6 +1,10 @@
 package com.infroid.samarpan;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +18,13 @@ import java.util.List;
 public class CitizenAdapter extends RecyclerView.Adapter<CitizenAdapter.MyViewHolder>{
 
     private LayoutInflater layoutInflater;
+    private AdapterButtonClickListener mBtnClickListener;
     List<CitizenInfo> data = Collections.emptyList();
-    AdminResultCitizenFragment obj = new AdminResultCitizenFragment();
-    public CitizenAdapter(Context context, List<CitizenInfo> data) {
+    AdminResultCitizenFragment obj;
+    public CitizenAdapter(Context context, List<CitizenInfo> data, AdminResultCitizenFragment frag) {
         this.data = data;
         layoutInflater = LayoutInflater.from(context);
-
+        this.obj = frag;
     }
 
     @Override
@@ -39,24 +44,28 @@ public class CitizenAdapter extends RecyclerView.Adapter<CitizenAdapter.MyViewHo
         holder.dob.setText(current.dob);
         holder.expertise_in.setText(current.expertise_in);
         holder.retirement.setText(current.retirement);
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+    holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obj.mCallback.switchFragment(1, current.user_id);
+                obj.switchFragments(1, current.user_id);
+                // Fragment fragment = new AdminEditCitizenFragment();
+                // Bundle bundle = new Bundle();
+                // bundle.putString("user_id", current.user_id);
+                // fragment.setArguments(bundle);
             }
         });
 
         holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obj.mCallback.switchFragment(2, current.user_id);
+                obj.switchFragments(2, current.user_id);
             }
         });
 
         holder.btnResume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obj.mCallback.switchFragment(5, current.user_id);
+                // obj.mCallback.switchFragment(5, current.user_id);
             }
         });
     }
