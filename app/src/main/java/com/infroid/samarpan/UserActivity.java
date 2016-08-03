@@ -124,7 +124,7 @@ public class UserActivity extends AppCompatActivity implements FragmentSwitchLis
 
                     case R.id.photo_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new UploadPhotoFragment());
+                        fragmentTransaction.replace(R.id.main_container, new UploadImageFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);

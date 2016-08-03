@@ -329,7 +329,7 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
         @Override
         protected Void doInBackground(Void... arg) {
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("currentuserid", session.getUserId().toString()));
+            params.add(new BasicNameValuePair("id", session.getUserId().toString()));
             params.add(new BasicNameValuePair("sector", experienceNew.getSector()));
             params.add(new BasicNameValuePair("category", experienceNew.getCategory()));
             params.add(new BasicNameValuePair("ministry", experienceNew.getMinistry()));

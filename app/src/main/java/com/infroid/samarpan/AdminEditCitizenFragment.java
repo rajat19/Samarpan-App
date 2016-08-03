@@ -408,7 +408,7 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
         @Override
         protected Void doInBackground(Void ...arg) {
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("currentuserid", tempUser));
+            params.add(new BasicNameValuePair("id", tempUser));
             params.add(new BasicNameValuePair("email", completeDetail.getEmail()));
             params.add(new BasicNameValuePair("contact", completeDetail.getContact()));
             params.add(new BasicNameValuePair("firstname", completeDetail.getFirstname()));

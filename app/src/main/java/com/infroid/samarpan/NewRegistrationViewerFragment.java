@@ -207,7 +207,7 @@ public class NewRegistrationViewerFragment extends Fragment implements View.OnCl
         @Override
         protected Void doInBackground(Void ...arg) {
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("currentuserid", session.getUserId().toString()));
+            params.add(new BasicNameValuePair("id", session.getUserId().toString()));
             params.add(new BasicNameValuePair("firstname", detailsNew.getFirstname()));
             params.add(new BasicNameValuePair("date_of_birth", detailsNew.getDate_of_birth()));
             params.add(new BasicNameValuePair("contact_work", detailsNew.getContact_work()));

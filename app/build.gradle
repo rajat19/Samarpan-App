@@ -34,4 +34,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
 }

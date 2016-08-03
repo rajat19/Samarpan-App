@@ -257,7 +257,7 @@ public class NewRegistrationFragment extends Fragment implements View.OnClickLis
         @Override
         protected Void doInBackground(Void ...arg) {
             List<NameValuePair> params = new ArrayList<>();
-            params.add(new BasicNameValuePair("currentuserid", session.getUserId().toString()));
+            params.add(new BasicNameValuePair("id", session.getUserId().toString()));
             params.add(new BasicNameValuePair("firstname", detailsNew.getFirstname()));
             params.add(new BasicNameValuePair("middlename", detailsNew.getMiddlename()));
             params.add(new BasicNameValuePair("lastname", detailsNew.getLastname()));

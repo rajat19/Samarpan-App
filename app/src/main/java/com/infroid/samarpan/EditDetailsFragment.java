@@ -274,8 +274,8 @@
                 flag++;
             }
             /*Contacts should only be numbers*/
-            if(!completeDetail.getContact_work().isEmpty() && !isPhone(completeDetail.getContact_work())){
-                Toast.makeText(getActivity(), "Not a valid office contact no.", Toast.LENGTH_SHORT).show();
+            if(!completeDetail.getContact_home().isEmpty() && !isPhone(completeDetail.getContact_home())){
+                Toast.makeText(getActivity(), "Not a valid home contact no.", Toast.LENGTH_SHORT).show();
                 flag++;
             }
             if(!completeDetail.getContact_other().isEmpty() && !isPhone(completeDetail.getContact_other())){
@@ -396,7 +396,8 @@
             @Override
             protected Void doInBackground(Void ...arg) {
                 List<NameValuePair> params = new ArrayList<>();
-                params.add(new BasicNameValuePair("currentuserid", session.getUserId().toString()));
+                Log.e("req", params+"");
+                params.add(new BasicNameValuePair("id", session.getUserId().toString()));
                 params.add(new BasicNameValuePair("firstname", completeDetail.getFirstname()));
                 params.add(new BasicNameValuePair("middlename", completeDetail.getMiddlename()));
                 params.add(new BasicNameValuePair("lastname", completeDetail.getLastname()));
