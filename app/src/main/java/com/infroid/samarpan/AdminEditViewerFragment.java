@@ -72,7 +72,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
         tempUser = getArguments().getString("user_id");
         btnDOB = (Button) view.findViewById(R.id.btnDOB);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
-        date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
+        date_of_birth = (TextView) view.findViewById(R.id.dob);
         email = (EditText) view.findViewById(R.id.fillEmail);
         contact = (EditText) view.findViewById(R.id.fillContact);
         firstname = (EditText) view.findViewById(R.id.fillFirstName);
@@ -133,7 +133,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
         email.setText(details.getEmail());
         contact.setText(details.getContact());
         firstname.setText(details.getFirstname());
-        date_of_birth.setText(details.getDate_of_birth());
+        btnDOB.setText(details.getDate_of_birth());
         expertise_in.setText(details.getExpertise_in());
         members.setText(details.getMembers());
         contact_work.setText(details.getContact_work());
@@ -173,7 +173,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
             year = newyear;
             month = monthOfYear;
             day = dayOfMonth;
-            date_of_birth.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
+            btnDOB.setText(new StringBuilder().append(year).append("-").append(month+1).append("-").append(day));
         }
     };
 
@@ -199,7 +199,7 @@ public class AdminEditViewerFragment extends Fragment implements View.OnClickLis
         completeDetail.setState_alternate(state_alternate.getText().toString());
         completeDetail.setCountry_alternate(country_alternate.getText().toString());
         completeDetail.setPincode_alternate(pincode_alternate.getText().toString());
-        completeDetail.setDate_of_birth(date_of_birth.getText().toString());
+        completeDetail.setDate_of_birth(btnDOB.getText().toString());
     }
 
     public int validateFilledDetails() {

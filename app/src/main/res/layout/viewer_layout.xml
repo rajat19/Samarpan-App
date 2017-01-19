@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/editViewer"
             android:text="Edit"
-            android:ems="9"
+            android:ems="10"
             android:tag=""
             android:layout_margin="2dp"
             android:layout_below="@+id/listDescription"
@@ -133,7 +133,7 @@
             android:layout_below="@+id/listDescription"
             android:layout_toEndOf="@+id/editViewer"
             android:background="@color/colorIndigo"
-            android:ems="9"
+            android:ems="10"
             android:layout_margin="2dp"
             android:tag=""
             android:textColor="@color/colorWhite"/>

@@ -249,6 +249,8 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
+        btnTo.setText(new StringBuilder().append(year).append("-").append(month + 1).append("-").append(day).append(" "));
+        btnTo.setText(new StringBuilder().append(year).append("-").append(month + 1).append("-").append(day).append(" "));
     }
 
     DatePickerDialog.OnDateSetListener onDateF = new DatePickerDialog.OnDateSetListener() {
@@ -257,7 +259,7 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
             year = newyear;
             month = monthOfYear;
             day = dayOfMonth;
-            from.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
+            btnFrom.setText(new StringBuilder().append(year).append("-").append(month + 1).append("-").append(day).append(" "));
         }
     };
 
@@ -267,7 +269,7 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
             year = newyear;
             month = monthOfYear;
             day = dayOfMonth;
-            to.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
+            btnTo.setText(new StringBuilder().append(year).append("-").append(month + 1).append("-").append(day).append(" "));
         }
     };
 
@@ -282,8 +284,8 @@ public class AddExperienceFragment extends Fragment implements View.OnClickListe
         experienceNew.setPosition(position.getText().toString());
         experienceNew.setRole(role.getText().toString());
         experienceNew.setDescription(description.getText().toString());
-        experienceNew.setFrom(from.getText().toString());
-        experienceNew.setTo(to.getText().toString());
+        experienceNew.setFrom(btnFrom.getText().toString());
+        experienceNew.setTo(btnTo.getText().toString());
     }
 
     public int validateFilledDetails() {

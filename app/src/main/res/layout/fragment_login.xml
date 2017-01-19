@@ -36,6 +36,7 @@
             android:orientation="vertical">
 
             <EditText
+                android:drawableLeft="@android:drawable/sym_action_email"
                 android:layout_marginTop="10dp"
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
                 android:fontFamily="Roboto"/>
 
             <EditText
+                android:drawableLeft="@android:drawable/ic_lock_idle_lock"
                 android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -68,12 +70,14 @@
                     android:layout_height="wrap_content"
                     android:text="Login"
                     android:id="@+id/btnLogin"
+                    android:textColor="@color/colorWhite"
                     android:layout_gravity="center_horizontal"
                     android:elevation="10dp"
                     android:background="@color/colorBlue"
                     android:translationZ="5dp"/>
 
                 <Button
+                    android:textColor="@color/colorWhite"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:padding="10dp"

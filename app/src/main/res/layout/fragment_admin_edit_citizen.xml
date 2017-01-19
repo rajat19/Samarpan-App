@@ -118,6 +118,7 @@
                     android:id="@+id/fillLastName"/>
 
                 <RadioGroup
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/fillLastName"
@@ -146,59 +147,61 @@
                         android:padding="10dp"
                         android:id="@+id/genderOther"/>
                 </RadioGroup>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/radio"
-                    android:text="Date of Birth"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorBlue"
-                    android:padding="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/btnDOB"
-                    android:ems="10"/>
-
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/radio"
-                    android:layout_toEndOf="@+id/btnDOB"
-                    android:layout_toRightOf="@+id/btnDOB"
-                    android:id="@+id/date_of_birth"
-                    android:hint="DD-MM-YYYY"
+                    android:id="@+id/dob"
+                    android:layout_marginTop="10dp"
+                    android:ems="7"
+                    android:hint="Date of Birth:"
                     android:textSize="20sp"
                     android:padding="10dp"/>
 
                 <Button
                     android:layout_width="wrap_content"
+                    android:drawableRight="@android:drawable/arrow_down_float"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/btnDOB"
-                    android:text="Date of Retirement"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorBlue"
-                    android:padding="5dp"
+                    android:layout_below="@+id/radio"
+                    android:layout_toRightOf="@+id/dob"
+                    android:text="YYYY-MM-DD"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
                     android:ems="10"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/btnRetire"
-                    android:shadowRadius="0.8"/>
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnDOB"
+                    />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/btnDOB"
-                    android:layout_toEndOf="@+id/btnRetire"
-                    android:layout_toRightOf="@+id/btnRetire"
-                    android:id="@+id/retirement"
-                    android:layout_marginTop="3dp"
-                    android:hint="DD-MM-YYYY"
+                    android:id="@+id/retire"
+                    android:layout_marginTop="10dp"
+                    android:hint="Retirement"
                     android:textSize="20sp"
+                    android:ems="7"
                     android:padding="10dp"/>
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnDOB"
+                    android:drawableRight="@android:drawable/arrow_down_float"
+                    android:text="YYYY-MM-DD"
+                    android:layout_toEndOf="@+id/retire"
+                    android:layout_toRightOf="@+id/retire"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnRetire"
+                    android:shadowRadius="0.8"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Biography..."
-                    android:layout_below="@+id/btnRetire"
+                    android:layout_below="@+id/retire"
                     android:inputType="textMultiLine"
                     android:id="@+id/biography"/>
 
@@ -590,7 +593,7 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Save Details"
                 android:textColor="@color/colorWhite"
-                android:background="@color/colorSecondary"
+                android:background="@color/colorBlue"
                 android:id="@+id/btnSubmit"/>
         </android.support.v7.widget.CardView>
     </LinearLayout>

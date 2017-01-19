@@ -36,6 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/company"
+                    android:layout_marginBottom="10dp"
                     android:inputType="textAutoComplete|textAutoCorrect"
                     android:hint="Search by Company Name..."/>
 
@@ -48,7 +49,7 @@
                     android:padding="10dp"
                     android:textSize="16dp"
                     android:drawableRight="@android:drawable/ic_menu_search"
-                    android:background="@color/colorTeal"
+                    android:background="@color/colorBlue"
                     android:textColor="@color/colorWhite"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>

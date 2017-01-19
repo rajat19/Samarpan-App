@@ -36,14 +36,16 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/sector"></Spinner>
+                    android:id="@+id/sector"
+                    android:layout_marginBottom="15dp"></Spinner>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/categoryPu"
                     android:visibility="gone"
-                    android:layout_below="@+id/sector"></Spinner>
+                    android:layout_below="@+id/sector"
+                    android:layout_marginBottom="15dp"></Spinner>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -90,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rank"
                     android:visibility="gone"
+                    android:layout_marginBottom="15dp"
                     android:layout_below="@+id/location"></Spinner>
 
                 <EditText
@@ -116,63 +119,64 @@
                     android:hint="Description..."
                     android:layout_below="@+id/role"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/description"
-                    android:text="Started Working From"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorBlue"
-                    android:padding="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/btnFrom"
-                    android:ems="10"/>
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/description"
-                    android:layout_toEndOf="@+id/btnFrom"
-                    android:layout_toRightOf="@+id/btnFrom"
                     android:id="@+id/from"
-                    android:hint="DD-MM-YYYY"
+                    android:ems="7"
+                    android:hint="Started Working From:"
                     android:textSize="20sp"
                     android:padding="10dp"/>
 
                 <Button
                     android:layout_width="wrap_content"
+                    android:drawableRight="@android:drawable/arrow_down_float"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/btnFrom"
-                    android:text="Ended Working On"
-                    android:textColor="@color/colorWhite"
-                    android:background="@color/colorBlue"
-                    android:padding="5dp"
+                    android:layout_below="@+id/description"
+                    android:layout_toRightOf="@+id/from"
+                    android:text="YYYY-MM-DD"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
                     android:ems="10"
-                    android:layout_marginBottom="5dp"
-                    android:id="@+id/btnTo"
-                    android:shadowRadius="0.8"/>
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnFrom"
+                    />
 
                 <TextView
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/btnFrom"
-                    android:layout_toEndOf="@+id/btnTo"
-                    android:layout_toRightOf="@+id/btnTo"
+                    android:layout_below="@id/from"
                     android:id="@+id/to"
                     android:layout_marginTop="3dp"
-                    android:hint="DD-MM-YYYY"
+                    android:hint="Ended Working On"
                     android:textSize="20sp"
+                    android:ems="7"
                     android:padding="10dp"/>
 
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/from"
+                    android:drawableRight="@android:drawable/arrow_down_float"
+                    android:text="YYYY-MM-DD"
+                    android:layout_toEndOf="@+id/to"
+                    android:layout_toRightOf="@+id/to"
+                    android:background="@color/colorWhite"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btnTo"
+                    android:shadowRadius="0.8"/>
                 <Button
                     android:padding="10dp"
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnAdd"
-                    android:background="@color/colorSecondary"
+                    android:background="@color/colorBlue"
                     android:text="Add Experience"
-                    android:layout_below="@+id/btnTo"
+                    android:layout_below="@+id/to"
                     android:textColor="@color/colorWhite"
                     android:drawableRight="@android:drawable/ic_menu_add"/>
             </RelativeLayout>

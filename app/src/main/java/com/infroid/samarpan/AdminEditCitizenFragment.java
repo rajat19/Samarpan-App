@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 public class AdminEditCitizenFragment extends Fragment implements View.OnClickListener{
     Button btnDOB, btnRetire, btnSubmit;
     TextView date_of_birth, retirement;
-    int year, month, day, profileCreated = 0;
+    int year, month, day, profileCreated = 0, oyear, omonth, oday;
     DatePickerFragment picker = new DatePickerFragment();
     Bundle args;
     ProgressDialog progressDialog;
@@ -75,7 +75,7 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
         btnDOB = (Button) view.findViewById(R.id.btnDOB);
         btnRetire = (Button) view.findViewById(R.id.btnRetire);
         btnSubmit = (Button) view.findViewById(R.id.btnSubmit);
-        date_of_birth = (TextView) view.findViewById(R.id.date_of_birth);
+        date_of_birth = (TextView) view.findViewById(R.id.dob);
         retirement = (TextView) view.findViewById(R.id.retirement);
         email = (EditText) view.findViewById(R.id.fillEmail);
         contact = (EditText) view.findViewById(R.id.fillContact);
@@ -126,9 +126,9 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
         switch (v.getId()) {
             case R.id.btnDOB:
                 args = new Bundle();
-                args.putInt("year", year);
-                args.putInt("month", month);
-                args.putInt("day", day);
+                args.putInt("year", oyear);
+                args.putInt("month", omonth);
+                args.putInt("day", oday);
                 picker.setArguments(args);
                 picker.setCallback(onDateB);
                 picker.show(getFragmentManager(), "datePicker");
@@ -159,9 +159,9 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
         firstname.setText(details.getFirstname());
         middlename.setText(details.getMiddlename());
         lastname.setText(details.getLastname());
-        date_of_birth.setText(details.getDate_of_birth());
+        btnDOB.setText(details.getDate_of_birth());
         expertise_in.setText(details.getExpertise_in());
-        retirement.setText(details.getRetirement());
+        btnRetire.setText(details.getRetirement());
         String gender = details.getGender();
         if(gender.equalsIgnoreCase("Male"))
             maleRadio.setChecked(true);
@@ -204,15 +204,18 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
+        oyear = 1950; omonth = 1; oday = 1;
+        btnDOB.setText(new StringBuilder().append(omonth + 1).append("-").append(oday).append("-").append(oyear).append(" "));
+        btnRetire.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
     }
 
     DatePickerDialog.OnDateSetListener onDateB = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int newyear, int monthOfYear, int dayOfMonth) {
-            year = newyear;
-            month = monthOfYear;
-            day = dayOfMonth;
-            date_of_birth.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
+            oyear = newyear;
+            omonth = monthOfYear;
+            oday = dayOfMonth;
+            btnDOB.setText(new StringBuilder().append(omonth + 1).append("-").append(oday).append("-").append(oyear).append(" "));
         }
     };
 
@@ -222,7 +225,7 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
             year = newyear;
             month = monthOfYear;
             day = dayOfMonth;
-            retirement.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
+            btnRetire.setText(new StringBuilder().append(month + 1).append("-").append(day).append("-").append(year).append(" "));
         }
     };
 
@@ -255,8 +258,8 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
         completeDetail.setState_alternate(state_alternate.getText().toString());
         completeDetail.setCountry_alternate(country_alternate.getText().toString());
         completeDetail.setPincode_alternate(pincode_alternate.getText().toString());
-        completeDetail.setDate_of_birth(date_of_birth.getText().toString());
-        completeDetail.setRetirement(retirement.getText().toString());
+        completeDetail.setDate_of_birth(btnDOB.getText().toString());
+        completeDetail.setRetirement(btnRetire.getText().toString());
         if(maleRadio.isChecked()) {
             completeDetail.setGender("Male");
         }
@@ -344,9 +347,9 @@ public class AdminEditCitizenFragment extends Fragment implements View.OnClickLi
                         completeDetail.setFirstname(userObj.getString("firstname"));
                         completeDetail.setMiddlename(userObj.getString("middlename"));
                         completeDetail.setLastname(userObj.getString("lastname"));
-                        completeDetail.setDate_of_birth(userObj.getString("date_of_birth2"));
+                        completeDetail.setDate_of_birth(userObj.getString("date_of_birth"));
                         completeDetail.setExpertise_in(userObj.getString("expertise_in"));
-                        completeDetail.setRetirement(userObj.getString("retirement2"));
+                        completeDetail.setRetirement(userObj.getString("retirement"));
                         completeDetail.setGender(userObj.getString("gender"));
                         completeDetail.setContact_home(userObj.getString("contact_home"));
                         completeDetail.setContact_other(userObj.getString("contact_other"));

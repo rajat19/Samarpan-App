@@ -74,6 +74,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/photo"
                         android:text="Date of Birth: "
+                        android:ems="10"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -92,6 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/date_of_birth"
                         android:text="Expertise In: "
+                        android:ems="10"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -104,6 +106,7 @@
                         />
 
                     <TextView
+                        android:ems="10"
                         android:id="@+id/headingRetirement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -127,6 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/retirement"
                         android:text="Gender: "
+                        android:ems="10"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -171,6 +175,7 @@
                     </View>
                     <TextView
                         android:id="@+id/headingContact"
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Contact Personal: "
@@ -187,6 +192,7 @@
                         />
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingContactMobile"
@@ -202,6 +208,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingContactOther"
@@ -217,6 +224,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingContactFax"
@@ -232,6 +240,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingContactPager"
@@ -247,6 +256,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingAddressPermanent"
@@ -262,6 +272,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingAddressCurrent"
@@ -277,6 +288,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingAddressAlternate"
@@ -324,6 +336,7 @@
                     </View>
 
                     <TextView
+                        android:ems="10"
                         android:id="@+id/headingEmailOther"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -341,6 +354,7 @@
                         />
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingSkype"
@@ -356,6 +370,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingFB"
@@ -371,6 +386,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingGoogle"
@@ -386,6 +402,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingLinkedin"
@@ -401,6 +418,7 @@
                         android:text=""/>
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingWebsite"
@@ -452,7 +470,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/hv3"
                         android:text="Goals: "
-
+                        android:ems="10"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -464,6 +482,7 @@
                         android:text=""
                         />
                     <TextView
+                        android:ems="10"
                         android:id="@+id/headingInterests"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -481,6 +500,7 @@
                         />
 
                     <TextView
+                        android:ems="10"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/headingBiography"

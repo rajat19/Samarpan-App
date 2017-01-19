@@ -37,14 +37,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/sector"
-                    android:layout_marginBottom="5dp"></Spinner>
+                    android:layout_marginBottom="15dp"></Spinner>
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/categoryPu"
-                    android:visibility="visible"
-                    android:layout_marginBottom="5dp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="15dp"
                     android:layout_below="@+id/sector"></Spinner>
 
                 <AutoCompleteTextView
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/categoryPr"
                     android:inputType="textAutoComplete|textAutoCorrect"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:hint="Private Sector Category..."
                     android:layout_below="@+id/categoryPu"/>
 
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/ministry"
                     android:inputType="textAutoComplete|textAutoCorrect"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:hint="Ministry..."
                     android:layout_below="@+id/categoryPr"/>
 
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/department"
                     android:inputType="textAutoComplete|textAutoCorrect"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:hint="Department..."
                     android:layout_below="@+id/ministry"/>
 
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/company"
                     android:inputType="textAutoComplete|textAutoCorrect"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:hint="Company Name..."
                     android:layout_below="@+id/department"/>
 
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/rank"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginBottom="5dp"
                     android:layout_below="@+id/company"></Spinner>
 
@@ -96,7 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/position"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:hint="Position..."
                     android:layout_below="@+id/rank"/>
 
@@ -108,7 +108,7 @@
                     android:id="@+id/btnSearch"
                     android:textSize="16dp"
                     android:drawableRight="@android:drawable/ic_menu_search"
-                    android:background="@color/colorSecondary"
+                    android:background="@color/colorBlue"
                     android:text="Search"
                     android:layout_below="@+id/position"
                     android:textColor="@color/colorWhite"/>

@@ -28,7 +28,7 @@ public class ServerLink {
     public String SEARCH_COMPANY_NAME; // for senior citizen
 
     public ServerLink() {
-    	SERVER_ADDRESS = "http://10.10.10.135/Samarpan-Web/public/";
+    	SERVER_ADDRESS = "http://192.168.126.1/Samarpan-Web/public/";
     	URL_PHOTO = SERVER_ADDRESS + "photo/";
         URL_CV = SERVER_ADDRESS + "cv/";
         MOBILE_ADDRESS = SERVER_ADDRESS + "mobile/";

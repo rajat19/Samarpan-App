@@ -44,7 +44,7 @@ public class ViewerActivity extends AppCompatActivity implements FragmentSwitchL
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main_container, new HomeFragment());
+        fragmentTransaction.add(R.id.main_container, new UserHomeFragment());
         fragmentTransaction.commit();
         textView = new TextView(getApplicationContext());
         textView.setText("Samarpan");
@@ -73,7 +73,7 @@ public class ViewerActivity extends AppCompatActivity implements FragmentSwitchL
 
                     case R.id.home_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+                        fragmentTransaction.replace(R.id.main_container, new UserHomeFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);
@@ -113,7 +113,7 @@ public class ViewerActivity extends AppCompatActivity implements FragmentSwitchL
 
                     case R.id.senior_citizens_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new WorkExperiencesFragment());
+                        fragmentTransaction.replace(R.id.main_container, new AdminSearchCitizenFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);
@@ -166,7 +166,7 @@ public class ViewerActivity extends AppCompatActivity implements FragmentSwitchL
                 break;
             default:
             /*Redirect to Home*/
-                fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+                fragmentTransaction.replace(R.id.main_container, new UserHomeFragment());
         }
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

@@ -136,7 +136,7 @@
             android:layout_below="@+id/listAddress"
             android:layout_toEndOf="@+id/editCitizen"
             android:background="@color/colorIndigo"
-            android:ems="8"
+            android:ems="7"
             android:layout_margin="2dp"
             android:tag=""
             android:textColor="@color/colorWhite"/>
@@ -148,9 +148,10 @@
             android:text="Resume"
             android:layout_margin="2dp"
             android:layout_below="@+id/listAddress"
+            android:layout_toRightOf="@+id/viewCitizen"
             android:layout_toEndOf="@+id/viewCitizen"
             android:background="@color/colorTeal"
-            android:ems="5"
+            android:ems="6"
             android:tag=""
             android:layout_alignParentEnd="true"
             android:textColor="@color/colorWhite"/>

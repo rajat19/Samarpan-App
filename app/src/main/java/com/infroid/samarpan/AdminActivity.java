@@ -46,7 +46,7 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.main_container, new HomeFragment());
+        fragmentTransaction.add(R.id.main_container, new UserHomeFragment());
         fragmentTransaction.commit();
 
         textView = new TextView(getApplicationContext());
@@ -75,7 +75,7 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
 
                     case R.id.home_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+                        fragmentTransaction.replace(R.id.main_container, new UserHomeFragment());
                         fragmentTransaction.commit();
                         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
                         getSupportActionBar().setCustomView(textView);
@@ -177,7 +177,7 @@ public class AdminActivity extends AppCompatActivity implements FragmentSwitchLi
                 fragmentTransaction.replace(R.id.main_container, new AdminSearchCitizenFragment());
             default:
             /*Redirect to Home*/
-                fragmentTransaction.replace(R.id.main_container, new HomeFragment());
+                fragmentTransaction.replace(R.id.main_container, new UserHomeFragment());
         }
         fragmentTransaction.commit();
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
